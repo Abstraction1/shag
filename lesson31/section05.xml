@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<?xml:stylesheet type="text/xsl" href="common/layout.xsl" ?>
+
+<lesson title="Урок №31" next="section06.xml" prev="section04.xml" summ="0">
+<h2>Пример реализации одиночного наследования.</h2>
+<p>А, сейчас реализуем ту конструкцию, которую мы создали условно, в одном из предыдущих разделов.</p>
+<example>
+#include &lt;iostream&gt;
+using namespace std;
+
+// Класс "точка"
+class Point{
+protected:
+	int x;
+	int y;
+public:
+	Point(){
+		x=0;
+		y=0;
+	}
+	// получение x
+	int&amp;GetX(){
+		return x;
+	}
+	// получение y
+	int&amp;GetY(){
+		return y;
+	}
+};
+
+class MyWindow: public Point{
+	int width;
+	int height;
+public:
+	MyWindow(int W,int H){
+		width=W;
+		height=H;		
+	}
+	// получение ширины
+	int&amp;GetWidth(){
+		return width;
+	}
+	// получение высоты
+	int&amp;GetHeight(){
+		return height;
+	}
+	// функции сдвига
+	void MoveX(int DX){
+		x+=DX;
+	}
+	void MoveY(int DY){
+		y=DY;
+	}
+	// показ на экран
+	void Show(){
+		cout&lt;&lt;"--------------\n\n";
+		cout&lt;&lt;"X = "&lt;&lt;x&lt;&lt;"\n\n";
+		cout&lt;&lt;"Y = "&lt;&lt;y&lt;&lt;"\n\n";
+		cout&lt;&lt;"W = "&lt;&lt;width&lt;&lt;"\n\n";
+		cout&lt;&lt;"H = "&lt;&lt;height&lt;&lt;"\n\n";
+		cout&lt;&lt;"--------------\n\n";
+	}
+};
+void main(){
+	// создание объекта
+	MyWindow A(10,10);
+	A.Show();
+	// изменение параметров
+	A.GetX()=5;
+	A.GetY()=3;
+	A.GetWidth()=40;
+	A.GetHeight()=50;
+	A.Show();
+	// сдвиг "окна"
+	A.MoveX(2);
+	A.MoveY(7);
+	A.Show();
+}
+
+</example>
+</lesson>

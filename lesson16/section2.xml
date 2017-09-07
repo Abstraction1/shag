@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<?xml:stylesheet type="text/xsl" href="common/layout.xsl" ?>
+
+<lesson title="Урок №16" next="section3.xml" prev="section1.xml" summ="0">	  
+
+<h2>Действия над структурами.</h2>
+<p>Итак, разберем операции, которые допустимо производить над структурами.</p>
+<ol>
+<li>Доступ к элементу структуры с помощью операции "." (точка). </li>
+<li>Доступ к элементу структуры по указателю с помощью операции "-&gt;" в виде: &lt;указатель на структуру&gt;"-&gt;"&lt;элемент_структуры&gt;. Так, обращения pd-&gt;year и (*pd).year эквивалентны. Круглые скобки (*pd) необходимы, поскольку операция "." доступа к элементу структуры старше, чем "*". 
+</li>
+<li>Определение адреса структуры с помощью операции "&amp;".</li>
+<example>
+#include &lt;iostream&gt;
+using namespace std;
+
+//Описание структуры с именем date.
+struct date
+{ 
+	int day; 
+	int month; 
+	int year; 
+	char mon_name[12];
+};
+
+//Создание и инициализация объекта структуры.
+date d = { 2,5,1776,"July" }; //d - переменная типа date.
+
+void main ()
+{
+	// Указатель p указывает на структуру типа date.
+	struct date *p; 
+
+	// Показ содержимого структуры на экран
+	//(обращение через объект)
+	cout&lt;&lt; d.day &lt;&lt; " "; 
+	cout&lt;&lt; d.year &lt;&lt; " "; 
+	cout&lt;&lt; d.month &lt;&lt; " ";
+	cout&lt;&lt; d.mon_name &lt;&lt; "\n\n";
+
+	// запись адреса объкта структуры в указатель
+	p = &amp;d;
+
+	// Показ содержимого структуры на экран
+	//(обращение через указатель)
+	cout &lt;&lt; p-&gt;day &lt;&lt; " ";
+	cout &lt;&lt; p-&gt;month &lt;&lt; " "; 
+	cout &lt;&lt; p-&gt;year &lt;&lt; " "; 
+	cout &lt;&lt; p-&gt;mon_name &lt;&lt; "\n\n";
+}
+
+</example>
+
+<li>Присваивание структуры как единого целого.</li> 
+
+<example>
+#include &lt;iostream&gt;
+using namespace std;
+
+struct date 
+{ 
+	int day; 
+	int month; 
+	int year; 
+	char mon_name[12];
+};
+
+date a = { 14,7,1954,"July" };
+date b;
+
+void main ()
+{
+	// показ содержимого объекта a
+	cout&lt;&lt; a.day &lt;&lt; " "; 
+	cout&lt;&lt; a.year &lt;&lt; " "; 
+	cout&lt;&lt; a.month &lt;&lt; " ";
+	cout&lt;&lt; a.mon_name &lt;&lt; "\n\n";
+
+	// инициализация объкта b объектом a
+	b = a;
+
+	// показ содержимого объекта b
+	cout&lt;&lt; b.day &lt;&lt; " "; 
+	cout&lt;&lt; b.year &lt;&lt; " "; 
+	cout&lt;&lt; b.month &lt;&lt; " ";
+	cout&lt;&lt; b.mon_name &lt;&lt; "\n\n";
+}
+</example>
+<li>Передача структуры в качестве параметра функции и возвращение структуры в результате работы функции.</li>
+<example>
+#include &lt;iostream&gt;
+using namespace std;
+
+struct date 
+{ 
+	int day; 
+	int month; 
+	int year; 
+	char mon_name[12];
+};
+
+void Show(date a){
+	// показ содержимого объекта a
+	cout&lt;&lt; a.day &lt;&lt; " "; 
+	cout&lt;&lt; a.year &lt;&lt; " "; 
+	cout&lt;&lt; a.month &lt;&lt; " ";
+	cout&lt;&lt; a.mon_name &lt;&lt; "\n\n";
+}
+
+date Put(){
+	// формирование объкта
+	date temp;
+	cout&lt;&lt;"DAY ? ";
+	cin&gt;&gt;temp.day;
+	cout&lt;&lt;"MONTH ? ";
+	cin&gt;&gt;temp.month;
+	cout&lt;&lt;"YEAR ? ";
+	cin&gt;&gt;temp.year;
+	cout&lt;&lt;"MONTH NAME ? ";
+	cin&gt;&gt;temp.mon_name;
+	return temp;
+}
+
+date a = { 14,7,1954,"July" };
+date b;
+
+void main ()
+{
+	// передача объекта в функцию
+	Show(a);
+
+	// получение объекта в качестве возвращаемого значения
+	b=Put();
+
+	// показ содержимого объекта b
+	Show(b);
+	
+}
+</example>
+<li>Передача отдельных компонент структуры в качестве аргументов функции. Например, для функции day_of_year1: 
+<example>
+#include &lt;iostream&gt;
+using namespace std;
+
+// вспомогательный массив, отвечающий за месяцы в году
+int day_tab[2][13]=
+{0,31,28,31,30,31,30,31,31,30,31,30,31,
+0,31,29,31,30,31,30,31,31,30,31,30,31};
+
+struct date 
+{ 
+	int day; 
+	int month; 
+	int year; 
+	int dayyear;
+	char mon_name[12];
+};
+
+void Show(date a){
+	// показ содержимого объекта a
+	cout&lt;&lt; a.day &lt;&lt; " "; 
+	cout&lt;&lt; a.year &lt;&lt; " "; 
+	cout&lt;&lt; a.month &lt;&lt; " ";
+	cout&lt;&lt; a.dayyear &lt;&lt; " ";
+	cout&lt;&lt; a.mon_name &lt;&lt; "\n\n";
+}
+
+int day_of_year1 (int day,int month,int year)
+{ 
+	//Вычисление дня в году с помощью месяца и года.
+	int i, leap;
+	leap = year%4==0 &amp;&amp; year%100!=0 || year%400==0;
+	for (i=1; i &lt;; month; i++) 
+		day += day_tab[leap][i];
+	return (day);
+} 
+
+date a = {20,7,1981,0,"July"};
+
+void main ()
+{
+	// передача отдельных членов  функцию
+	a.dayyear=day_of_year1(a.day,a.month,a.year);
+
+	// показ содержимого объекта a
+	Show(a);	
+}
+
+</example>
+
+<p>
+А теперь, рассмотрим порядок выполнения некоторых наиболее распространенных операций над элементами структуры на примере следующего описания:
+</p>
+
+<example>
+struct
+{
+	int x;
+	int *y;
+
+} *p; // p - указатель на структуру.
+
+</example>
+
+<ul>
+<li>(++p)-&gt;x - операция увеличивает p до доступа к x; 
+</li>
+<li>(p++)-&gt;x - операция увеличивает p после доступа к x (круглые скобки не обязательны, так как по старшинству раньше будет применена операция "-&gt;"); </li>
+<li>*p-&gt;y - выбирается содержимое объекта, на который указывает y;</li>
+<li>*p-&gt;y++ - увеличивается y после обработки того, на что он указывает (аналогично *s++);</li>
+<li>*p++-&gt;y - увеличивает p после выборки того, на что указывает y; 
+</li>
+<li>(*(*p).y)++ - увеличивает то, на что указывает y.</li>
+</ul> </li>
+</ol>
+<p>Можно отметить одно очень важное использование структур: создание новых типов данных. Существуют типы данных, гораздо более эффективные при решении определенных задач, чем массивы и структуры. Это очереди, двоичные деревья, множества, таблицы и графы. Многие из этих типов создаются из "связанных" структур. Обычно каждая такая структура содержит один или два типа данных плюс один или два указателя на другие структуры такого же типа. Указатели служат для связи одной структуры с другой и для обеспечения пути, позволяющего вести поиск по всей структуре.</p>
+</lesson>

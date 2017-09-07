@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<?xml:stylesheet type="text/xsl" href="common/layout.xsl" ?>
+
+<lesson title="Урок №8" next="section1.xml" prev="index.xml">
+<h2>Урок №8</h2>
+<ul>
+	<li><a href="section1.xml">Введение в мир функций. Необходимость использования. Объявление. Вызов. </a></li>
+	<li><a href="section2.xml">Примеры на создание и вызов функций.</a></li>
+	<li><a href="section3.xml">Передача аргументов. Прототипы функций.</a></li>
+	<li><a href="section4.xml">Область видимости. Глобальные и локальные переменные.</a></li>
+	<li><a href="section5.xml">Аргументы (параметры) по умолчанию.</a></li>
+	<li><a href="hometask.xml">Домашнее задание</a></li>
+	
+</ul>
+</lesson>

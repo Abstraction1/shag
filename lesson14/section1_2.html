@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<?xml:stylesheet type="text/xsl" href="common/layout.xsl" ?>
+
+<lesson title="Урок №14." next="section2.xml" prev="section1.xml" summ="1">
+
+<h2>Взаимосвязь строк и указателей.</h2>
+<p> Мы с Вами уже обсуждали тему указателей в одном из уроков и Вы должны помнить, как тесно они связаны с массивами. Поэтому сегодня мы так же не сможем обойти указатели стороной. В программе доступ к строке осуществляется с помощью указателя на символ. Если описать переменную <b>message</b> как</p>
+<example>char *message;</example>
+<p>то в результате выполнения оператора</p>
+<example>message = "and bye!";</example>
+<p><b>message</b> станет указателем на строку.</p>
+<example>
+#include &lt;iostream&gt;
+using namespace std;
+char *message;
+char privet[] = "and bye!";
+char *pr = privet;
+void main ()
+{
+      message = "Hello"; 
+      cout &lt;&lt; " " &lt;&lt; message &lt;&lt; " " &lt;&lt; pr &lt;&lt; "\n";
+      int i = 0;
+      while  (*(pr+i)!='\0')
+      {
+         cout&lt;&lt; *(pr+i++) &lt;&lt; " ";
+      }
+}
+</example>
+<p>Использование указателей часто применяется при работе с массивом строк. В этом случае к каждой строке можно обратиться с помощью указателя на его первый символ. Это удобно тем, что для перестановки двух строк, расположенных в неправильном порядке, фактически достаточно переставить указатели в массиве указателей, а не сами строки.</p>
+<p>Рассматривается функция <b>month_name()</b>, которая возвращает указатель на строку, содержащий имя n-го месяца. Это типичная задача для использования строкового массива.</p>
+<p>Функция <b>month_name()</b> содержит локальный массив строк и при обращении к ней возвращает указатель на нужную строку.</p>
+<p>В описании массива указателей на символы <b>name[]</b> инициализатором является просто список строк. Символы i-й строки помещаются в определенное место памяти, а указатель на ее начало хранится в элементе <b>name[i]</b>. Поскольку размер массива <b>name</b> не указан, компилятор сам подсчитывает количество инициализаторов и соответственно устанавливает правильное число.</p>
+<example>
+#include &lt;iostream&gt;
+using namespace std;
+const int n=15;
+void main ()
+{
+      char *month_name(int);
+      /* ------------- */
+      for (int i=0; i &lt; n; i++)
+         cout &lt;&lt; "Month number " &lt;&lt; i &lt;&lt; " - " &lt;&lt;  month_name(i) &lt;&lt;"\n";
+ }
+/* ------------------------------------------- */
+char *month_name (int k)  /* Название k-го месяца */
+{
+      static char *name[] = {
+                              "none","January",
+                              "February","March","April",
+                              "May","June","July","August",
+                              "September","October","November",
+                              "December"
+                            };
+      return (k&lt;1||k&gt;12)?name[0]:name[k];
+}
+</example>
+<p> Результат работы программы:</p>
+<example>
+Month number 0 - none
+Month number 1 - January
+Month number 2 - February
+Month number 3 - March
+Month number 4 - April
+Month number 5 - May
+Month number 6 - June
+Month number 7 - July
+Month number 8 - August
+Month number 9 - September
+Month number 10 - October
+Month number 11 - November
+Month number 12 - December
+Month number 13 - none
+Month number 14 - none
+Press any key to continue
+
+</example>
+
+</lesson>

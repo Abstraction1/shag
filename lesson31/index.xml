@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<?xml:stylesheet type="text/xsl" href="common/layout.xsl" ?>
+
+<lesson title="Урок №31" next="section01.xml" prev="index.xml">
+<h2>Урок №31.</h2>
+<ul>
+	<li><a href="section01.xml">Вложенный класс.</a></li>
+	<li><a href="section02.xml">Агрегирование и композиция.</a></li>
+	<li><a href="section03.xml">Наследование. Основные понятия.</a></li>
+	<li><a href="section04.xml">Спецификаторы доступа при наследовании и синтаксис организации наследования.</a></li>
+	<li><a href="section05.xml">Пример реализации одиночного наследования.</a></li>
+	<li><a href="section06.xml">Множественное наследование.</a></li>	
+	<li><a href="section07.xml">Пример использования множественного наследования.</a></li>
+	<li><a href="section08.xml">Обсуждение плюсов и минусов наследования.</a></li>
+	<li><a href="section09.xml">Наследование шаблонов.</a></li>
+	<li><a href="hometask.xml">Домашнее задание.</a></li> 
+
+</ul>
+</lesson>
+
+
+
+
+
+
+
+
+
+
+
+
+

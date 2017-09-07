@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<?xml:stylesheet type="text/xsl" href="common/layout.xsl" ?>
+
+<lesson title="Урок №21" next="section01.xml" prev="index.xml">
+<h2>Урок №21.</h2>
+<ul>
+	<li><a href="section01.xml">Перегруженные конструкторы.</a></li>
+	<li><a href="section02.xml">Указатели на объекты.</a></li>
+	<li><a href="section03.xml">Указатель this.</a></li>
+	<li><a href="section04.xml">Конструктор копирования.</a></li>
+	<li><a href="hometask.xml">Домашнее задание</a></li>
+</ul>
+</lesson>
+
+

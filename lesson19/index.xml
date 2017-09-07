@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<?xml:stylesheet type="text/xsl" href="common/layout.xsl" ?>
+
+<lesson title="Урок №19" next="section1.xml" prev="index.xml">
+<h2>Урок №19.</h2>
+<ul>
+	<li><a href="section1.xml">Форматирование ввода-вывода средствами языка С. </a></li>
+	<li><a href="section2.xml">Форматирование ввода-вывода средствами языка С++. </a></li>
+	
+</ul>
+</lesson>

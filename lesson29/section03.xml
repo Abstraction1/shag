@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<?xml:stylesheet type="text/xsl" href="common/layout.xsl" ?>
+
+<lesson title="Урок №29" next="section04.xml" prev="section02.xml" summ="0">
+<h2>Операции по работе с директориями.</h2>
+<p>Кроме рассмотренных в предыдущем разделе урока файлах, существуют еще и папки, не так ли?! И, сейчас, мы с Вами займемся изучением приемов работы с папками (каталогами, директориями).</p>
+<h4>Набор функций.</h4>
+<h5>Библиотека direct.h</h5>
+<hr/>
+<p><b>int _mkdir( const char *dirname )</b></p>
+<p>Создает директорию по указанному пути.</p>
+<p><b>dirname</b> - Путь и имя для создаваемой директории.</p>
+<hr/>
+<p><b>int _rmdir( const char *dirname )</b></p>
+<p>Удаляет директорию по указанному пути.</p>
+<p><b>dirname</b> - Путь и имя для удаляемой директории.</p>
+<hr/>
+<p>Обе функции возвращают -1 в случае ошибки.</p>
+<hr/>
+<tip start="Примечание">Кстати!!! Для переименования директории можно использовать функцию rename из библиотеки stdio.h.</tip>
+<p><b><i>Внимание!!! Удалить и переименовать можно только пустую директорию!!!</i></b></p>
+<h4>Пример на работу с директориями.</h4>
+<example>
+#include &lt;iostream&gt;
+#include &lt;direct.h&gt;
+#include &lt;stdio.h&gt;
+
+using namespace std;
+
+// Переименовать существующую директорию
+void RenameDirectory();
+
+// Удалить существующую директорию
+void RemoveDirectory();   
+
+// создать директорию
+void CreateDirectory();    
+
+void main()
+{
+	// предлагаем выбрать пункт меню для выполнения
+	cout &lt;&lt; "Please, select preffer number...\n";
+
+	//выбор пользователя
+	char ch; 
+	do{
+		// Переименовать
+		cout &lt;&lt; "\n1 - Rename\n";
+		// Удалить   
+		cout &lt;&lt; "2 - Remove\n";   
+		// Создать
+		cout &lt;&lt; "3 - Create\n";	
+		// Выход
+		cout &lt;&lt; "0 - Exit\n\n";    
+		cin &gt;&gt; ch;
+
+		// анализируем и вызываем 
+		// соответствующую  функцию
+		switch(ch)
+		{
+			case '1':
+				RenameDirectory();   
+			break;
+			case '2':
+				RemoveDirectory();   
+			break;
+			case '3':
+				CreateDirectory();
+			break;
+		}			
+	} while(ch != '0');      // Выход из программы
+}
+
+// Переименовать существующую директорию
+void RenameDirectory()       
+{
+	char oldName[50], newName[50];
+
+	// В одной переменной запомним существующее имя (oldName), 
+	cout &lt;&lt; "Enter old name:";
+	cin &gt;&gt; oldName;
+		
+	// А в другой новое имя(newName)
+	cout &lt;&lt; "Enter new name:";
+	cin &gt;&gt; newName;
+
+	// Произведем переименование и проверку результата
+	if (rename(oldName, newName) != 0)
+		cout &lt;&lt; "Error!\n Couldn't rename directory.\n\n";
+	else 
+		cout &lt;&lt; "Ok...\n\n";
+}
+
+// Удалить существующую директорию
+void RemoveDirectory()           
+{
+	char Name[50];
+	// Получаем имя и путь к удаляемой директории
+	cout &lt;&lt; "Enter name:";
+	cin &gt;&gt; Name;
+
+	//Удаляем директорию и проверяем результат	
+	if (_rmdir(Name) == -1)
+		cout &lt;&lt; "Error!\n Couldn't remove directory.\n";
+	else 
+		cout &lt;&lt; "Ok...\n" ;
+}
+// Создать директорию
+void CreateDirectory()           
+{
+	char Name[50];
+	// Получаем имя и путь к создаваемой директории
+	cout &lt;&lt; "Enter name:";
+	cin &gt;&gt; Name;
+
+	//Создаем директорию и проверяем результат	
+	if (_mkdir(Name) == -1)
+		cout &lt;&lt; "Error!\n Couldn't create directory.\n";
+	else 
+		cout &lt;&lt; "Ok...\n" ;
+}
+</example>
+</lesson>

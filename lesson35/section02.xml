@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<?xml:stylesheet type="text/xsl" href="common/layout.xsl" ?>
+
+<lesson title="Урок №35" next="section03.xml" prev="section01.xml" summ="1">
+<h2>Анализ и использование класса list. Библиотека list.</h2>
+<p>Класс <b><i>list</i></b> поддерживает работу двунаправленного связанного списка. Спецификация его шаблона выглядит следующим образом:</p>
+<example>
+template &lt;class T, class Allocator = Alloctor&lt;T&gt;&gt;
+class list
+</example>
+<p>Здесь <b>T</b> - <b><i>тип данных, сохраняемых  в списке</i></b>. Класс <i><b>list</b></i> имеет следующие конструкторы:</p>
+<example>
+explicit list(const Allocator &amp;a = Allocator());
+<br/>
+explicit list(size_type num, const T &amp;val = T(), const Allocator &amp;a = Allocator());
+<br/>
+vector(const list &lt;T,Allocator&gt; &amp;ob);
+<br/>
+template &lt; class InIter&gt; vector(InIter start, InIter end, const Allocator &amp;a = Allocator());
+</example>
+<p>Первая форма конструктора создает пустой список. Вторая создает список, который содержит num элементов со значением val. Третья создает список, который содержит те же элементы, что и список ob. Четвертая создает список, который содержит элементы в диапазоне, заданном параметрами start и end.</p>
+<p>Для класса <i><b>list</b></i> определены следующие операторы сравнения:</p>
+<ul>
+<li><b><i>==</i></b></li>
+<li><b><i>&lt;</i></b></li>
+<li><b><i>&lt;=</i></b></li>
+<li><b><i>!=</i></b></li>
+<li><b><i>&gt;</i></b></li>
+<li><b><i>&gt;=</i></b></li></ul>
+<p>Класс <i><b>list</b></i> содержит следующие функции-члены:</p>
+<hr/>
+<p><b>template &lt;class InIter&gt;
+void assign(InIter start, InIter end);</b></p>
+<p>Помещает в список последовательность, определяемую параметрами start и end.</p>
+<hr/>
+<p><b>void assign(size_type num, const T &amp;val);</b></p>
+<p>Помещает в список num элементов со значением val.</p>
+<hr/>
+<p><b>reference back();</b></p>
+<p><b>const_reference back() const;</b></p>
+<p>Возвращает ссылку на последний элемент в списке.</p>
+<hr/>
+<p><b>iterator begin();</b></p>
+<p><b>const_iterator begin() const;</b></p>
+<p>Возвращает итератор для первого элемента в списке.</p>
+<hr/>
+<p><b>void clear();</b></p>
+<p>Удаляет все элементы из списка.</p>
+<hr/>
+<p><b>bool empty() const;</b></p>
+<p>Возвращает значение истины, если используемый список пуст, и значение лжи в противном случае.</p>
+<hr/>
+<p><b>const_iterator end() const;</b></p>
+<p><b>iterator end();</b></p>
+<p>Возвращает итератор для конца списка.</p>
+<hr/>
+<p><b>iterator erase(iterator i);</b></p>
+<p>Удаляет элемент, адресуемый итератором i, возвращает итератор для элемента, расположенного после удаленного.</p>
+<hr/>
+<p><b>iterator erase(iterator start, iterator end);</b></p>
+<p>Удаляет элементы в диапазоне, задаваемом параметрами start и end, возвращает итератор для элемента, расположенного за последним удалённым элементом.</p>
+<hr/>
+<p><b>reference front();</b></p>
+<p><b>const_reference front() const;</b></p>
+<p>Возвращает ссылку на первый элемент в списке.</p>
+<hr/>
+<p><b>allocator_type get_allocator() const;</b></p>
+<p>Возвращает распределитель списка.</p>
+<hr/>
+<p><b>iterator insert(iterator i, const T &amp;val = T());</b></p>
+<p>Вставляет значение val непосредственно перед элементом, заданным параметром i, возвращает итератор для этого элемента.</p>
+<hr/>
+<p><b>void insert(iterator i, size_type num, const T &amp;val);</b></p>
+<p>Вставляет num копий значения val непосредственно перед элементом, заданным параметром i.</p>
+<hr/>
+<p><b>template &lt;class InIter&gt;
+void insert(iterator i, InIter start, InIter end);</b></p>
+<p>Вставляет в список последовательность, определяемую параметрами start и end, непосредственно перед элементом, заданным параметром i.</p>
+<hr/>
+<p><b>size_type max_size() const;</b></p>
+<p>Возвращает максимальное число элементов, которое может содержать список.</p>
+<hr/>
+<p><b>void merge(list&lt;T,Allocator&gt; &amp;ob);</b></p>
+<p><b>template &lt;class Comp&gt;
+void merge(list&lt;T,Allocator&gt; &amp;ob, Comp cmpfn);</b></p>
+<p>Объединяет упорядоченный список, содержащийся в объекте ob, с данным упорядоченным списком Результат также упорядочивается. После объединения список, содержащийся в объекте ob, остается пустым. Во второй форме может быть задана функция сравнения, которая определяет, когда один элемент меньше другого.</p>
+<hr/>
+<p><b>void pop_back();</b></p>
+<p>Удаляет последний элемент в списке.</p>
+<hr/>
+<p><b>void pop_front();</b></p>
+<p>Удаляет первый элемент в списке.</p>
+<hr/>
+<p><b>void push_back(const T &amp;val);</b></p>
+<p>Добавляет в конец списка элемент со значением, заданным параметром val.</p>
+<hr/>
+<p><b>void push_front(const T &amp;val);</b></p>
+<p>Добавляет в начало списка элемент со значением, заданным параметром val.</p>
+<hr/>
+<p><b>reverse_iterator rbegin();</b></p>
+<p><b>const_reverse_iterator rbegin() const;</b></p>
+<p>Возвращает реверсивный итератор для конца списка.</p>
+<hr/>
+<p><b>reverse_iterator rend();</b></p>
+<p><b>const_reverse_iterator rend() const;</b></p>
+<p>Возвращает реверсивный итератор для начала списка.</p>
+<hr/>
+<p><b>void remove(const T &amp;val);</b></p>
+<p>Удаляет из списка элементы со значением, заданным параметром val.</p>
+<hr/>
+<p><b>
+template &lt;class UnPred&gt;
+void remove_if(UnPred pr);</b></p>
+<p>Удаляет элементы, для которых унарный предикат pr равен значению true.</p>
+<hr/>
+<p><b>void resize(size_type num, const T &amp;val = T());</b></p>
+<p>Устанавливает емкость списка равной не менее заданного значения num, если вектор для этого нужно удлинить, то в его конец добавляются элементы со значением, заданным параметром val.</p>
+<hr/>
+<p><b>void reverse();</b></p>
+<p>Реверсирует список.</p>
+<hr/>
+<p><b>size_type size() const;</b></p>
+<p>Возвращает текущее количество элементов в списке.</p>
+<hr/>
+<p><b>void sort();</b></p>
+<p><b>template &lt;class Comp&gt;
+void sort(Comp cmpfn);</b></p>
+<p>Сортирует список. Вторая форма сортирует список с помощью функции сравнения cmpfn, чтобы определять, когда один элемент меньше другого.</p>
+<hr/>
+<p><b>void splice(iterator i, list&lt;T,Allocator&gt; &amp;ob);</b></p>
+<p>Вставляет содержимое списка ob в данный список в позиции, указанной итератором i, После выполнения этой операции список ob остается пустым.</p>
+<hr/>
+<p><b>void splice(iterator i, list&lt;T,Allocator&gt; &amp;ob, iterator el);</b></p>
+<p>удаляет из списка ob элемент, адресуемый итератором el, и сохраняет его в позиции, адресуемой итератором i.</p>
+<hr/>
+<p><b>void splice(iterator i, list&lt;T,Allocator&gt; &amp;ob, iterator start, iterator end);</b></p>
+<p>удаляет из списка ob диапазон, определяемый параметрами start и end, и сохраняет его в данном списке, начиная с позиции, адресуемой итератором i.</p>
+<hr/>
+<p><b>void swap(list&lt;T,Allocator&gt; &amp;ob);</b></p>
+<p>Выполняет обмен элементами данного списка и списка ob.</p>
+<hr/>
+<p><b>void unique();</b></p>
+<p><b>template &lt;class BinPred&gt;
+void unique(BinPred pr);</b></p>
+<p>Удаляет из списка элементы-дубликаты. Вторая форма для определения уникальности использует предикат pr.</p>
+</lesson>

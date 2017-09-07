@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<?xml:stylesheet type="text/xsl" href="common/layout.xsl" ?>
+
+<lesson title="Урок №35" next="hometask.xml" prev="section03.xml" summ="0">
+<h2>Анализ и использование класса multimap. Библиотека multimap.</h2>
+<p>Модифицированный вариант map, в котором отсутствует требования уникальности ключа - то есть, если произвести поиск по ключу, то вернется не одно значение, а набор значений, сохраненных с данным ключом. </p>
+<p>Класс <i><b>multimap</b></i> поддерживает поддерживает ассоциативный контейнер, в котором неуникальным (в общем случае) ключам соответствуют определённые значения. Спецификация его шаблона имеет следующий вид:</p>
+<example>
+template &lt;class Key, class T, class Comp = less&lt;key&gt;,
+class Allocator =Alloctor&lt;pair&lt;const key, T&gt;&gt;&gt;
+class multimap
+</example>
+<p>Здесь <b>key</b> - <b><i>тип данных ключей</i></b>,<b>T</b> - <b><i>тип сохраняемых (отображемых)значений</i></b>, а <b>Comp</b><b><i> - функция, которая сравнивает два ключа.</i></b> Класс <i><b>multimap</b></i> имеет следующие конструкторы:</p>
+<example>
+explicit multimap(const Comp &amp;cmpfn = Comp(),Allocator &amp;a = Allocator());
+<br/>
+multimap(multimap&lt;Key, T, Comp,Allocator&gt; &amp;ob);
+<br/>
+
+template &lt; class InIter&gt; multimap(InIter start, InIter end,const Comp &amp;cmpfn = Comp(),
+ const Allocator &amp;a = Allocator());
+</example>
+<p>Первая форма конструктора создает пустое мультиотображение. Вторая создает мультиотображение, которое содержит те же элементы, что и мультиотображение ob. Третья создает мультиотображение, которое содержит элементы в диапазоне, заданном параметрами start и end. Функция, заданная параметром cmpfn (и если она задана), определяет упорядочение мультиотображения.</p>
+<p>Для класса <i><b>multimap</b></i> определены следующие операторы сравнения:</p>
+<ul>
+<li><b><i>==</i></b></li>
+<li><b><i>&lt;</i></b></li>
+<li><b><i>&lt;=</i></b></li>
+<li><b><i>!=</i></b></li>
+<li><b><i>&gt;</i></b></li>
+<li><b><i>&gt;=</i></b></li></ul>
+<p>Класс <i><b>multimap</b></i> содержит перечисленные ниже функции-члены. В приведенных описаниях элемент <i><b>key_type</b></i> представляет тип ключа, а элемент <i><b>value_type</b></i> - пару элементов pair&lt;Key, T&gt;.</p>
+<hr/>
+<p><b>iterator begin();</b></p>
+<p><b>const_iterator begin() const;</b></p>
+<p>Возвращает итератор для первого элемента в мультиотображении.</p>
+<hr/>
+<p><b>void clear();</b></p>
+<p>Удаляет все элементы из мультиотображения.</p>
+<hr/>
+<p><b>size_type count(const key_type &amp;k) const;</b></p>
+<p>Возвращает число вхождений ключа k в мультиотображении (1 или 0).</p>
+<hr/>
+<p><b>bool empty() const;</b></p>
+<p>Возвращает значение true, если данное мультиотображение пустое, и false в противном случае.</p>
+<hr/>
+<p><b>const_iterator end() const;</b></p>
+<p><b>iterator end();</b></p>
+<p>Возвращает итератор, указывающий на конец мультиотображения.</p>
+<hr/>
+<p><b>pair&lt;iterator, iterator&gt;
+equal_range(const key_type &amp;k);</b></p>
+<p><b>pair&lt;const_iterator, const_iterator&gt;
+equal_range(const key_type &amp;k) const;</b></p>
+<p>Возвращает пару итераторов, которые указывают на первый и последний элементы в мультиотображении, содержащие заданный ключ.</p>
+<hr/>
+<p><b>void erase(iterator i);</b></p>
+<p>Удаляет элемент, адресуемый итератором i.</p>
+<hr/>
+<p><b>void erase(iterator start, iterator end);</b></p>
+<p>Удаляет элементы в диапазоне, задаваемом параметрами start и end.</p> 
+<hr/>
+<p><b>size_type erase(const key_type &amp;k);</b></p>
+<p>Удаляет из мультиотображения элементы, ключи которых имеют значение k.</p> 
+<hr/>
+<p><b>iterator find(const key_type &amp;k);</b></p>
+<p><b>const_iterator find(const key_type &amp;k) const;</b></p>
+<p>Возвращает итератор для заданного ключа. Если ключ не обнаружен, возвращает итератор до конца мультиотображения.</p> 
+<hr/>
+<p><b>allocator_type get_allocator() const;</b></p>
+<p>Возвращает распределитель мультиотображения.</p>
+<hr/>
+<p><b>iterator insert(iterator i, const value_type &amp;val);</b></p>
+<p>Вставляет значение val после элемента, заданным итератором i, возвращает итератор для этого элемента.</p>
+<hr/>
+<p><b>template &lt;class InIter&gt;
+void insert(InIter start, InIter end);</b></p>
+<p>Вставляет элементы заданного диапазона.</p>
+<hr/>
+<p><b>pair&lt;iterator, bool&gt;
+insert(const value_type &amp;val);</b></p>
+<p>Вставляет значение val в используемое мультиотображение. Возвращает итератор для данного мультиотображения. Элемент вставляет только в том случае, если его еще нет в мультиотображении. Если элемент был вставлен возвращает пару pair&lt;iterator, true&gt;, в противном случае pair&lt;iterator, false&gt;</p>
+<hr/>
+<p><b>key_compare key_comp() const;</b></p>
+<p>Возвращает объект-функцию, которая сравнивает ключи.</p>
+<hr/>
+<p><b>iterator lower_bound(const key_type &amp;k);</b></p>
+<p><b>const_iterator lower_bound(const key_type &amp;k) const;</b></p>
+<p>Возвращает итератор для первого элемента в мультиотображении, ключ которого равен значению k или больше этого значения.</p> 
+<hr/>
+<p><b>size_type max_size() const;</b></p>
+<p>Возвращает максимальное число элементов, которое может содержать мультиотображение.</p>
+<hr/>
+<p><b>reference operator[](const key_type &amp;i);</b></p>
+<p>Возвращает ссылку на элемент, заданный параметром i. Если этого элемента не существует, вставляет его в мультиотображение.</p>
+<hr/>
+<p><b>reverse_iterator rbegin();</b></p>
+<p><b>const_reverse_iterator rbegin() const;</b></p>
+<p>Возвращает реверсивный итератор для конца мультиотображения.</p>
+<hr/>
+<p><b>reverse_iterator rend();</b></p>
+<p><b>const_reverse_iterator rend() const;</b></p>
+<p>Возвращает реверсивный итератор для начала мультиотображения.</p>
+<hr/>
+<p><b>size_type size() const;</b></p>
+<p>Возвращает текущее количество элементов в мультиотображении.</p>
+<hr/>
+<p><b>void swap(multimap&lt;Key, T, Comp, Allocator&gt; &amp;ob);</b></p>
+<p>Выполняет обмен элементами данного мультиотображения и мультиотображения ob.</p>
+<hr/>
+<p><b>iterator upper_bound(const key_type &amp;k);</b></p>
+<p><b>const_iterator upper_bound(const key_type &amp;k) const;</b></p>
+<p>Возвращает итератор для первого элемента в мультиотображении, ключ которого больше заданного значения k.</p>
+<hr/>
+<p><b>value_compare value_comp() const;</b></p>
+<p>Возвращает объект-функцию, которая сравнивает значения.</p>
+</lesson>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<?xml:stylesheet type="text/xsl" href="common/layout.xsl" ?>
+
+<lesson title="Урок №9" next="section1.xml" prev="index.xml">
+<h2>Урок №9.</h2>
+<ul>
+	<li><a href="section1.xml">Встраивание.</a></li>
+	<li><a href="section2.xml">Перегрузка функций.</a></li>
+	<li><a href="section3.xml">Шаблоны функций. </a></li>
+	<li><a href="hometask.xml">Домашнее задание</a></li>
+	<li><a href="runtest.xml">Тест для самопроверки.</a></li>
+	
+</ul>
+</lesson>

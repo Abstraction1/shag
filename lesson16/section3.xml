@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<?xml:stylesheet type="text/xsl" href="common/layout.xsl" ?>
+
+<lesson title="Урок №16" next="hometask.xml" prev="section2.xml" summ="0">
+<h2>Оператор sizeof.</h2>
+<p>В языке С существует специальная унарная операция sizeof, которая возвращает размер своего операнда в байтах. Операндом операции sizeof может быть любое выражение:</p>
+<example>sizeof(Выражение);</example>
+<p> Результат операции sizeof имеет тип int. </p>
+
+<p>Получение размера объекта.</p>
+<example>
+#include &lt;iostream&gt;
+using namespace std;
+void main ()
+{
+      int a;
+      char b;
+      unsigned c;
+      int *p;
+      /* ----------------------------- */
+      cout&lt;&lt;"sizeof(a)="&lt;&lt;sizeof(a)&lt;&lt;"\n";
+      cout&lt;&lt;"sizeof(b)="&lt;&lt;sizeof(b)&lt;&lt;"\n";
+      cout&lt;&lt;"sizeof(c)="&lt;&lt;sizeof(c)&lt;&lt;"\n";
+      cout&lt;&lt;"sizeof(p)="&lt;&lt;sizeof(p)&lt;&lt;"\n";
+      cout&lt;&lt;"sizeof(int)="&lt;&lt;sizeof(int)&lt;&lt;"\n";
+      cout&lt;&lt;"sizeof(int *)="&lt;&lt;sizeof(int *)&lt;&lt;"\n";
+}
+Результат работы программы:
+sizeof(a)=4
+sizeof(b)=1
+sizeof(c)=4
+sizeof(p)=4
+sizeof(int)=4
+sizeof(int *)=4
+</example>
+<h5>Размеры структуры.</h5>
+<p> Наверняка, вы предполагаете, что размер структуры равен сумме размеров ее членов. Это не так. Вследствие выравнивания объектов разной длины в структуре могут появляться безымянные "дыры". Так, например, если переменная типа char занимает один байт, а int - четыре байта, то для структуры:</p>
+<example>
+#include &lt;iostream&gt;
+using namespace std;
+struct Test
+{
+	char c;
+	int i;
+};
+void main ()
+{
+	Test d={'#',78};
+	cout&lt;&lt;sizeof(Test)&lt;&lt;" "&lt;&lt;sizeof(d)&lt;&lt;"\n\n";
+}
+</example>
+<p>может потребоваться восемь байт, а не пять. Правильное значение возвращает операция sizeof.</p>
+</lesson>

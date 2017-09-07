@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<?xml:stylesheet type="text/xsl" href="common/layout.xsl" ?>
+
+<lesson title="Урок №16" next="section1.xml" prev="index.xml">
+<h2>Урок №16.</h2>
+<ul>
+	<li><a href="section1.xml">Структура. Определение структур.</a></li>
+	<li><a href="section2.xml">Действия над структурами.</a></li>
+	<li><a href="section3.xml">Оператор sizeof.</a></li>
+	<li><a href="hometask.xml">Домашнее задание</a></li>
+	
+</ul>
+</lesson>

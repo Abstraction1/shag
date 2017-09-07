@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<?xml:stylesheet type="text/xsl" href="common/layout.xsl" ?>
+
+<lesson title="Урок №29" next="section02.xml" prev="index.xml" summ="1">
+<h2>Практический пример. Cохранение объектов структуры в файл.</h2>
+<p>
+И, снова, здравствуйте!!! Для начала мы с вами сегодня закрепим прошлый материал и рассмотрим сохранение объекта структуры в файл. Приступим. 
+</p>
+<example>
+#include &lt;iostream&gt;
+#include &lt;string.h&gt;
+#include &lt;stdio.h&gt;
+
+using namespace std;
+// структура, хранящая 
+// информацию о человеке
+struct Man{
+	//Имя
+	char str[255];
+	//Возраст
+	int age;
+};
+void main()
+{
+	//Создание объектов структуры
+	Man A,B;
+	//Запись в объект A
+	//информации, полученной
+	//с клавиатуры
+	cout&lt;&lt;"\nEnter name:\n";
+	cin&gt;&gt;A.str;
+	cout&lt;&lt;"\nEnter age:\n";
+	cin&gt;&gt;A.age;
+
+	//открытие файла на запись
+	FILE*f=fopen("Test.txt","w+");
+	if(!f) exit(0);
+	//запись объекта А в файл
+	fwrite(&amp;A,sizeof(Man),1,f);
+	c
+	fclose(f);
+
+	//открытие файла на чтение
+	f=fopen("Test.txt","r+");
+	if(!f) exit(0);
+	//считывание содержимого файла
+	//в объект B
+	fread(&amp;B,sizeof(Man),1,f);
+	//открытие файла на запись
+	fclose(f);
+
+	//показ результата на экран
+	cout&lt;&lt;"\nName - "&lt;&lt;B.str&lt;&lt;"\n\nAge - "&lt;&lt;B.age&lt;&lt;"\n\n";
+
+	
+}
+
+
+</example>
+</lesson>

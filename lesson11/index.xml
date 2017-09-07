@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<?xml:stylesheet type="text/xsl" href="common/layout.xsl" ?>
+
+<lesson title="Урок №11" next="section1.xml" prev="index.xml">
+<h2>Урок №11.</h2>
+<ul>
+	<li><a href="section1.xml">Знакомство с рекурсией.</a></li>
+	<li><a href="section2.xml">Рекурсии или итерации? </a></li>
+	<li><a href="section3.xml">Быстрая сортировка.</a></li>
+	<li><a href="section4.xml">Двоичный поиск. </a></li>	
+	<li><a href="hometask.xml">Домашнее задание</a></li>
+</ul>
+</lesson>

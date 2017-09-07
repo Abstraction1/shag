@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<?xml:stylesheet type="text/xsl" href="common/layout.xsl" ?>
+
+<lesson title="Урок №18" next="section1.xml" prev="index.xml">
+<h2>Урок №18.</h2>
+<ul>
+ 
+	<li><a href="section1.xml">Препроцессор.</a></li>
+	<li><a href="section2.xml">Определение констант с помощью #define.</a></li>
+	<li><a href="section3.xml">Условная компиляция.</a></li>
+	<li><a href="section4.xml">Другие директивы препроцессора.</a></li>
+	<li><a href="section5.xml">Разнесение проекта по несколько файлов.</a></li>
+	<li><a href="hometask.xml">Экзаменационные задания.</a></li>
+</ul>
+</lesson>

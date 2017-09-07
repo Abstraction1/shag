@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<?xml:stylesheet type="text/xsl" href="common/layout.xsl" ?>
+
+<lesson title="Урок №35" next="section04.xml" prev="section02.xml" summ="0">
+<h2>Анализ и использование класса map. Библиотека map.</h2>
+<p>Класс <i><b>map</b></i> поддерживает поддерживает ассоциативный контейнер, в котором уникальным ключам соответствуют определённые значения. Спецификация его шаблона имеет следующий вид:</p>
+<example>
+template &lt;class Key, class T, class Comp = less&lt;key&gt;,
+class Allocator =Alloctor&lt;pair&lt;const key, T&gt;&gt;&gt;
+class map
+</example>
+<p>Здесь <b>key</b> - <b><i>тип данных ключей</i></b>,<b>T</b> - <b><i>тип сохраняемых (отображемых)значений</i></b>, а <b>Comp</b><b><i> - функция, которая сравнивает два ключа.</i></b> Класс <i><b>map</b></i> имеет следующие конструкторы:</p>
+<example>
+explicit map(const Comp &amp;cmpfn = Comp(),Allocator &amp;a = Allocator());
+<br/>
+explicit vector(map&lt;Key, T, Comp,Allocator&gt; &amp;ob);
+<br/>
+
+template &lt; class InIter&gt; map(InIter start, InIter end,const Comp &amp;cmpfn = Comp(),
+ const Allocator &amp;a = Allocator());
+</example>
+<p>Первая форма конструктора создает пустое отображение. Вторая создает отображение, которое содержит те же элементы, что и отображение ob. Третья создает отображение, которое содержит элементы в диапазоне, заданном параметрами start и end. Функция, заданная параметром cmpfn (и если она задана), определяет упорядочение отображения.</p>
+<p>Для класса <i><b>map</b></i> определены следующие операторы сравнения:</p>
+<ul>
+<li><b><i>==</i></b></li>
+<li><b><i>&lt;</i></b></li>
+<li><b><i>&lt;=</i></b></li>
+<li><b><i>!=</i></b></li>
+<li><b><i>&gt;</i></b></li>
+<li><b><i>&gt;=</i></b></li></ul>
+<p>Класс <i><b>map</b></i> содержит перечисленные ниже функции-члены. В приведенных описаниях элемент <i><b>key_type</b></i> представляет тип ключа, а элемент <i><b>value_type</b></i> - пару элементов pair&lt;Key, T&gt;.</p>
+<hr/>
+<p><b>iterator begin();</b></p>
+<p><b>const_iterator begin() const;</b></p>
+<p>Возвращает итератор для первого элемента в отображении.</p>
+<hr/>
+<p><b>void clear();</b></p>
+<p>Удаляет все элементы из отображения.</p>
+<hr/>
+<p><b>size_type count(const key_type &amp;k) const;</b></p>
+<p>Возвращает число вхождений ключа k в отображении (1 или 0).</p>
+<hr/>
+<p><b>bool empty() const;</b></p>
+<p>Возвращает значение true, если данное отображение пустое, и false в противном случае.</p>
+<hr/>
+<p><b>const_iterator end() const;</b></p>
+<p><b>iterator end();</b></p>
+<p>Возвращает итератор, указывающий на конец отображения.</p>
+<hr/>
+<p><b>pair&lt;iterator, iterator&gt;
+equal_range(const key_type &amp;k);</b></p>
+<p><b>pair&lt;const_iterator, const_iterator&gt;
+equal_range(const key_type &amp;k) const;</b></p>
+<p>Возвращает пару итераторов, которые указывают на первый и последний элементы в отображении, содержащие заданный ключ.</p>
+<hr/>
+<p><b>void erase(iterator i);</b></p>
+<p>Удаляет элемент, адресуемый итератором i.</p>
+<hr/>
+<p><b>void erase(iterator start, iterator end);</b></p>
+<p>Удаляет элементы в диапазоне, задаваемом параметрами start и end.</p> 
+<hr/>
+<p><b>size_type erase(const key_type &amp;k);</b></p>
+<p>Удаляет из отображения элементы, ключи которых имеют значение k.</p> 
+<hr/>
+<p><b>iterator find(const key_type &amp;k);</b></p>
+<p><b>const_iterator find(const key_type &amp;k) const;</b></p>
+<p>Возвращает итератор для заданного ключа. Если ключ не обнаружен, возвращает итератор до конца отображения.</p> 
+<hr/>
+<p><b>allocator_type get_allocator() const;</b></p>
+<p>Возвращает распределитель отображения.</p>
+<hr/>
+<p><b>iterator insert(iterator i, const value_type &amp;val);</b></p>
+<p>Вставляет значение val после элемента, заданным итератором i, возвращает итератор для этого элемента.</p>
+<hr/>
+<p><b>template &lt;class InIter&gt;
+void insert(InIter start, InIter end);</b></p>
+<p>Вставляет элементы заданного диапазона.</p>
+<hr/>
+<p><b>pair&lt;iterator, bool&gt;
+insert(const value_type &amp;val);</b></p>
+<p>Вставляет значение val в используемое отображение. Возвращает итератор для данного отображения. Элемент вставляет только в том случае, если его еще нет в отображении. Если элемент был вставлен возвращает пару pair&lt;iterator, true&gt;, в противном случае pair&lt;iterator, false&gt;</p>
+<hr/>
+<p><b>key_compare key_comp() const;</b></p>
+<p>Возвращает объект-функцию, которая сравнивает ключи.</p>
+<hr/>
+<p><b>iterator lower_bound(const key_type &amp;k);</b></p>
+<p><b>const_iterator lower_bound(const key_type &amp;k) const;</b></p>
+<p>Возвращает итератор для первого элемента в отображении, ключ которого равен значению k или больше этого значения.</p> 
+<hr/>
+<p><b>size_type max_size() const;</b></p>
+<p>Возвращает максимальное число элементов, которое может содержать отображение.</p>
+<hr/>
+<p><b>reference operator[](const key_type &amp;i);</b></p>
+<p>Возвращает ссылку на элемент, заданный параметром i. Если этого элемента не существует, вставляет его в отображение.</p>
+<hr/>
+<p><b>reverse_iterator rbegin();</b></p>
+<p><b>const_reverse_iterator rbegin() const;</b></p>
+<p>Возвращает реверсивный итератор для конца отображения.</p>
+<hr/>
+<p><b>reverse_iterator rend();</b></p>
+<p><b>const_reverse_iterator rend() const;</b></p>
+<p>Возвращает реверсивный итератор для начала отображения.</p>
+<hr/>
+<p><b>size_type size() const;</b></p>
+<p>Возвращает текущее количество элементов в отображении.</p>
+<hr/>
+<p><b>void swap(map&lt;Key, T, Comp, Allocator&gt; &amp;ob);</b></p>
+<p>Выполняет обмен элементами данного отображения и отображения ob.</p>
+<hr/>
+<p><b>iterator upper_bound(const key_type &amp;k);</b></p>
+<p><b>const_iterator upper_bound(const key_type &amp;k) const;</b></p>
+<p>Возвращает итератор для первого элемента в отображении, ключ которого больше заданного значения k.</p>
+<hr/>
+<p><b>value_compare value_comp() const;</b></p>
+<p>Возвращает объект-функцию, которая сравнивает значения.</p>
+<hr/>
+<p>
+Этот класс предназначен для быстрого поиска значения по ключу. В качестве ключа может быть использовано все, что угодно, но при этом необходимо помнить, что главной особенностью ключа является возможность применить к нему операцию сравнения. Быстрый поиск значения по ключу осуществляется благодаря тому, что пары хранятся в отсортированном виде. Этот класс имеет  недостаток - скорость вставки новой пары обратно пропорциональна количеству элементов, сохраненных в классе. Еще один важный момент - ключ должен быть уникальным.
+</p>
+</lesson>

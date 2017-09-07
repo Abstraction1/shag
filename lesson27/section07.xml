@@ -1,0 +1,545 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<?xml:stylesheet type="text/xsl" href="common/layout.xsl" ?>
+
+<lesson title="Урок №27" next="hometask.xml" prev="section06.xml" summ="0">
+<h2>Реализация шаблонного двусвязного списка.</h2>
+<example>
+include &lt;iostream&gt;
+using namespace std;
+
+template &lt;typename T&gt;
+struct Elem
+{
+   // Любые данные
+   T data;
+   Elem * next, * prev;
+};
+
+template &lt;typename T&gt;
+class List
+{
+   // Голова хвост
+   Elem&lt;T&gt; * Head, * Tail;
+   int Count;
+
+public:
+	
+   List();
+   List(const List&amp;);
+   ~List();
+
+   int GetCount();
+   Elem&lt;T&gt;* GetElem(int);
+
+   void DelAll();
+   void Del(int);
+   void Del();
+
+   void AddTail();
+   void AddTail(T);
+
+   void AddHead(T);
+   void AddHead();
+	
+   void Print();
+   void Print(int pos);	
+	
+   List&amp; operator = (const List&amp;);
+   List operator + (const List&amp;);
+	
+   bool operator == (const List&amp;);
+   bool operator != (const List&amp;);
+   bool operator &lt;= (const List&amp;);
+   bool operator &gt;= (const List&amp;);
+   bool operator &lt; (const List&amp;);
+   bool operator &gt; (const List&amp;);
+
+   List operator - ();
+};
+
+template &lt;typename T&gt;
+List&lt;T&gt;::List()
+{
+   Head = Tail = 0;
+   Count = 0;
+}
+
+template &lt;typename T&gt;
+List&lt;T&gt;::List(const List &amp; L)
+{
+   Head = Tail = 0;
+   Count = 0;
+
+   Elem&lt;T&gt; * temp = L.Head;
+   while(temp != 0)
+   {
+      AddTail(temp->data);
+      temp = temp->next;
+   }
+}
+
+template &lt;typename T&gt;
+List&lt;T&gt;::~List()
+{
+   DelAll();
+}
+
+template &lt;typename T&gt;
+Elem&lt;T&gt;* List&lt;T&gt;::GetElem(int pos)
+{
+   Elem&lt;T&gt; *temp = Head;
+   
+   // Позиция от 1 до Count?
+   if(pos &lt; 1 || pos &gt; Count)
+   {
+      // Неверная позиция
+      cout &lt;&lt; "Incorrect position !!!\n";
+      return;
+   }
+   
+   int i = 1;
+   while(i &lt; pos &amp;&amp; temp != 0)
+   {
+      temp = temp->next;
+      i++;
+   }
+
+   if(temp == 0)
+      return 0;
+   else
+      return temp;
+}
+
+template &lt;typename T&gt;
+void List&lt;T&gt;::AddHead()
+{
+   Elem&lt;T&gt; * temp = new Elem&lt;T&gt;;
+
+   temp->prev = 0;
+	
+   int n;
+   cout &lt;&lt; "Input new number: ";
+   cin &gt;&gt; n;
+
+   temp->data = n;
+
+   temp->next = Head;
+	
+   if(Head != 0)
+      Head->prev = temp;
+
+   if(Count == 0)
+      Head = Tail = temp;
+   else
+      Head = temp;
+
+   Count++;
+}
+
+template &lt;typename T&gt;
+void List&lt;T&gt;::AddHead(T n)
+{
+   Elem&lt;T&gt; * temp = new Elem&lt;T&gt;;
+	
+   temp->prev = 0;
+   temp->data = n;
+   temp->next = Head;
+	
+   if(Head != 0)
+      Head->prev = temp;
+	
+   if(Count == 0)
+      Head = Tail = temp;
+   else
+      Head = temp;
+
+   Count++;
+}
+
+template &lt;typename T&gt;
+void List&lt;T&gt;::AddTail()
+{
+   Elem&lt;T&gt; * temp = new Elem&lt;T&gt;;
+	
+   temp->next = 0;
+   int n;
+   cout &lt;&lt; "Input new number: ";
+   cin &gt;&gt; n;
+	
+   temp->data = n;
+   temp->prev = Tail;
+	
+   if(Tail != 0)
+      Tail->next = temp;
+
+   if(Count == 0)
+      Head = Tail = temp;
+   else
+      Tail = temp;	
+
+   Count++;
+}
+
+template &lt;typename T&gt;
+void List&lt;T&gt;::AddTail(T n)
+{
+   Elem&lt;T&gt; * temp = new Elem&lt;T&gt;;
+	
+   temp->next = 0;
+   temp->data = n;
+   temp->prev = Tail;
+	
+   if(Tail != 0)
+      Tail->next = temp;
+
+   if(Count == 0)
+      Head = Tail = temp;
+   else
+      Tail = temp;			
+
+   Count++;
+}
+
+template &lt;typename T&gt;
+void List&lt;T&gt;::Del()
+{
+   int n;
+   cout &lt;&lt; "Input position: ";
+   cin &gt;&gt; n;
+
+   if(n &lt; 1 || n &gt; Count)
+   {
+      cout &lt;&lt; "Incorrect position !!!\n";
+      return;
+   }
+
+   int i = 1;
+   Elem&lt;T&gt; * Del = Head;
+	
+   while(i &lt;= n)
+   {
+      // Доходим до элемента, который удаляется
+      Del = Del->next;
+      i++;
+   }
+
+   // Доходим до элемента, который предшествует удаляемому
+   Elem&lt;T&gt; * PrevDel = Del->prev;
+   // Доходим до элемента, который следует за удаляемым
+   Elem&lt;T&gt; * AfterDel = Del->next;
+	
+   if(PrevDel != 0 &amp;&amp; Count != 1)
+      PrevDel->next = AfterDel;
+
+   if(AfterDel != 0 &amp;&amp; Count != 1)
+      AfterDel->prev = PrevDel;
+	
+   if(n == 1)
+      Head = AfterDel;
+   if(n == Count)
+      Tail = PrevDel;
+
+   delete Del;
+
+   Count--;
+}
+
+template &lt;typename T&gt;
+void List&lt;T&gt;::Del(int n)
+{	
+   if(n &lt; 1 || n &gt; Count)
+   {
+      cout &lt;&lt; "Incorrect position !!!\n";
+      return;
+   }
+	
+   int i = 1;
+   Elem&lt;T&gt; * Del = Head;
+	
+   while(i &lt; n)
+   {
+      // Доходим до элемента, который удаляется
+      Del = Del->next;
+      i++;
+   }
+	
+   // Доходим до элемента, который предшествует удаляемому
+   Elem&lt;T&gt; * PrevDel = Del->prev;
+   // Доходим до элемента, который следует за удаляемым
+   Elem&lt;T&gt; * AfterDel = Del->next;
+	
+   if(PrevDel != 0 &amp;&amp; Count != 1)
+      PrevDel->next = AfterDel;
+		
+   if(AfterDel != 0 &amp;&amp; Count != 1)
+      AfterDel->prev = PrevDel;
+	
+   if(n == 1)
+      Head = AfterDel;
+   if(n == Count)
+      Tail = PrevDel;
+
+   delete Del;
+	
+   Count--;
+}
+
+template &lt;typename T&gt;
+void List&lt;T&gt;::Print(int pos)
+{
+   // Позиция от 1 до Count?
+   if(pos &lt; 1 || pos &gt; Count)
+   {
+      // Неверная позиция
+      cout &lt;&lt; "Incorrect position !!!\n";
+      return;
+   }
+
+   Elem&lt;T&gt; * temp;
+
+   // Определяем с какой стороны 
+   // быстрее двигаться
+   if(pos &lt;= Count / 2)
+   {
+      // Отсчет с головы
+      temp = Head;
+      int i = 1;
+
+      while(i &lt; pos)
+      {
+         // Двигаемся до нужного элемента
+         temp = temp->next;
+         i++;
+      }
+   }
+   else
+   {
+      // Отсчет с хвоста
+      temp = Tail;
+      int i = 1;
+
+      while(i &lt;= Count - pos)
+      {
+         // Двигаемся до нужного элемента
+         temp = temp->prev;
+         i++;
+      }
+   }
+   // Вывод элемента
+   cout &lt;&lt; pos &lt;&lt; " element: ";
+   cout &lt;&lt; temp->data &lt;&lt; "\n";
+}
+
+template &lt;typename T&gt;
+void List&lt;T&gt;::Print()
+{
+   if(Count != 0)
+   {
+      Elem&lt;T&gt; * temp = Head;
+      while(temp != 0)
+      {
+         cout &lt;&lt; temp->data &lt;&lt; "\n";
+         temp = temp->next;
+      }
+   }
+}
+
+template &lt;typename T&gt;
+void List&lt;T&gt;::DelAll()
+{
+   while(Count != 0)
+      Del(1);
+}
+
+template &lt;typename T&gt;
+int List&lt;T&gt;::GetCount()
+{
+   return Count;
+}
+
+template &lt;typename T&gt;
+List&lt;T&gt;&amp; List&lt;T&gt;::operator = (const List&lt;T&gt; &amp; L)
+{
+   if(this == &amp;L)
+      return *this;
+
+   this->~List();
+
+   Elem&lt;T&gt; * temp = L.Head;
+
+   while(temp != 0)
+   {
+      AddTail(temp->data);
+      temp = temp->next;
+   }
+
+   return *this;
+}
+
+template &lt;typename T&gt;
+List&lt;T&gt; List&lt;T&gt;::operator + (const List&lt;T&gt;&amp; L)
+{
+   List Result(*this);
+	
+   Elem&lt;T&gt; * temp = L.Head;
+
+   while(temp != 0)
+   {
+      Result.AddTail(temp->data);
+      temp = temp->next;
+   }
+
+   return Result;
+}
+
+template &lt;typename T&gt;
+bool List&lt;T&gt;::operator == (const List&lt;T&gt;&amp; L)
+{
+   if(Count != L.Count)
+      return false;
+
+   Elem&lt;T&gt; *t1, *t2;
+
+   t1 = Head;
+   t2 = L.Head;
+
+   while(t1 != 0)
+   {
+      if(t1->data != t2->data)
+         return false;
+	
+      t1 = t1->next;
+      t2 = t2->next;
+   }
+
+   return true;
+}
+
+template &lt;typename T&gt;
+bool List&lt;T&gt;::operator != (const List&amp; L)
+{
+   if(Count != L.Count)
+      return true;
+	
+   Elem&lt;T&gt; *t1, *t2;
+	
+   t1 = Head;
+   t2 = L.Head;
+	
+   while(t1 != 0)
+   {
+      if(t1->data != t2->data)
+         return true;
+		
+      t1 = t1->next;
+      t2 = t2->next;
+   }
+	
+   return false;
+}
+
+template &lt;typename T&gt;
+bool List&lt;T&gt;::operator &gt;= (const List&amp; L)
+{
+   if(Count &gt; L.Count)
+      return true;
+	
+   if(*this == L)
+      return true;
+	
+   return false;
+}
+
+template &lt;typename T&gt;
+bool List&lt;T&gt;::operator &lt;= (const List&amp; L)
+{
+   if(Count &lt; L.Count)
+      return true;
+	
+   if(*this == L)
+      return true;
+	
+   return false;
+}
+
+template &lt;typename T&gt;
+bool List&lt;T&gt;::operator &gt; (const List&amp; L)
+{
+   if(Count &gt; L.Count)
+      return true;
+	
+   return false;
+}
+
+template &lt;typename T&gt;
+bool List&lt;T&gt;::operator &lt; (const List&amp; L)
+{
+   if(Count &lt; L.Count)
+      return true;
+	
+   return false;
+}
+
+template &lt;typename T&gt;
+List&lt;T&gt; List&lt;T&gt;::operator - ()
+{
+   List Result;
+   Elem&lt;T&gt; * temp = Head;
+	
+   while(temp != 0)
+   {
+      Result.AddHead(temp->data);
+      temp = temp->next;
+   }
+
+   return Result;
+}
+
+// Тестовый пример
+void main()
+{
+   List &lt;int&gt; L;
+
+   const n = 10;
+   int a[n] = {0,1,2,3,4,5,6,7,8,9};
+
+   // Добавляем элементы, стоящие на четных индексах, в голову,
+   // на нечетных - в хвост
+   for(int i = 0; i &lt; n; i++)
+      if(i % 2 == 0)
+         L.AddHead(a[i]);
+      else
+         L.AddTail(a[i]);
+
+   // Распечатка списка
+   cout &lt;&lt; "List L:\n";
+   L.Print();
+
+   cout &lt;&lt; "\n\n";
+
+   // Распечатка списка
+   cout &lt;&lt; "List L:\n";
+   L.Print();
+
+   // Распечатка 2-го и 8-го элементов списка
+   L.Print(2);
+   L.Print(8);
+
+   List &lt;int&gt; T;
+
+   // Копируем список
+   T = L;
+   // Распечатка копии
+   cout &lt;&lt; "List T:\n";
+   T.Print();
+
+   // Складываем два списка (первый в перевернутом состоянии)
+   cout &lt;&lt; "List Sum:\n";
+   List &lt;int&gt; Sum = -L + T;
+   // Распечатка списка
+   Sum.Print();
+}
+
+
+</example>
+</lesson>

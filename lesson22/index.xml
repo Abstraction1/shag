@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<?xml:stylesheet type="text/xsl" href="common/layout.xsl" ?>
+
+<lesson title="Урок №22" next="section01.xml" prev="index.xml">
+<h2>Урок №22.</h2>
+<ul>
+	<li><a href="section01.xml">Константный метод.</a></li>
+	<li><a href="section02.xml">Пример на создание класса - СТРОКА.</a></li>
+	<li><a href="section03.xml">Перегрузка операторов.</a></li>
+	<li><a href="section04.xml">Преобразования, определяемые классом.</a></li>
+	<li><a href="section05.xml">Пример класса СТРОКА с перегруженными операторами.</a></li>
+	<li><a href="hometask.xml">Домашнее задание</a></li>
+</ul>
+</lesson>
+
+

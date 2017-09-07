@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<?xml:stylesheet type="text/xsl" href="common/layout.xsl" ?>
+
+<lesson title="Урок №34" next="section01.xml" prev="index.xml">
+<h2>Урок №34.</h2>
+<ul>
+	<li><a href="section01.xml">Преобразование типов в стиле С++.</a></li>
+	<li><a href="section02.xml">Стандартная библиотека шаблонов (STL) и её основные понятия (контейнер, итератор, алгоритм, функтор, предикат, аллокатор).</a></li>
+	<li><a href="section04.xml">Класс auto_ptr.</a></li>
+	<li><a href="section05.xml">Анализ и использование класса string.</a></li>
+	<li><a href="section07.xml">Детальный анализ итератора. </a></li>
+	<li><a href="hometask.xml">Домашнее задание.</a></li> 
+
+</ul>
+</lesson>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<?xml:stylesheet type="text/xsl" href="common/layout.xsl" ?>
+
+<lesson title="Урок №29" next="hometask.xml" prev="section05.xml" summ="0">
+<h2>Практический пример.</h2>
+<p>
+Пример программы, которая создает HTML-документ и окрашивает его фон цветом переданным из командной строки в качестве параметра.
+</p>
+<example>
+#include &lt;iostream&gt;
+#include &lt;string.h&gt;
+#include &lt;stdio.h&gt;
+
+using namespace std;
+
+void main(int argc, char * argv[])
+{
+	//Задаем по умолчанию черный цвет
+	char str[7]="000000";
+	//формируем начало HTML - документа
+	char filehtml[256]="&lt;html&gt;&lt;head&gt;&lt;title&gt;New file!!!&lt;/title&gt;&lt;/head&gt;&lt;body bgcolor = \'#";
+	//Открываем файл на запись с созданием 
+	FILE*f=fopen("C:\\1.html","w+");
+	//Если не получилось - останавливаемся
+	if(!f) exit(0);
+	//Если параметр цвета передан - используем его
+	if(argc==2){
+		strcpy(str,argv[1]);
+	}
+	//Присоединяем цвет к документу
+	strcat(filehtml,str);
+	//Присоединяем окончание к документу
+	strcat(filehtml,"\'&gt;&lt;/body&gt;&lt;/html&gt;");
+	//Сохраняем в файл
+	fputs(filehtml,f);
+	//Закрываем Файл
+	fclose(f);
+	cout&lt;&lt;"\nOK.....\n";
+}
+</example>
+
+</lesson>

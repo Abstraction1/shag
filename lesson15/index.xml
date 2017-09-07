@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<?xml:stylesheet type="text/xsl" href="common/layout.xsl" ?>
+
+<lesson title="Урок №15" next="section1.xml" prev="index.xml">
+<h2>Урок №15.</h2>
+<ul>
+	<li><a href="section1.xml">Многомерные динамические массивы. </a></li>
+	<li><a href="section2.xml">Примеры на многомерные динамические массивы.</a></li>
+	<li><a href="section3.xml">Перечисляемые типы.</a></li>
+	<li><a href="section4.xml">Указатели на функции.</a></li>
+	<li><a href="hometask.xml">Домашнее задание</a></li>
+</ul>
+</lesson>

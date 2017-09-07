@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<?xml:stylesheet type="text/xsl" href="common/layout.xsl" ?>
+
+<lesson title="Урок №22" next="section05.xml" prev="section03.xml" summ="0">
+<h2>Преобразования, определяемые классом.</h2>
+<p>Условно, все преобразования типов можно разделить на четыре основные группы:</p>
+
+<ul>
+<li>
+<b>Cтандартный к стандартному</b> - эти преобразования уже были нами подробно рассмотрены в одном из уроков. 
+</li>
+<li>
+<b>Cтандартный к абстрактному</b> - преобразования этой группы основаны на использовании конструкторов.
+<example>
+
+#include &lt;iostream&gt;
+
+using namespace std;
+
+class Digit                
+{
+	private:
+		int dig;	
+	public:
+		Digit(int iDig){
+			dig=iDig;
+		}
+		void Show(){
+			cout&lt;&lt;dig&lt;&lt;"\n";
+		}
+};
+
+
+void main()
+{
+	// преобразование от int к Digit
+	Digit A(5);
+	A.Show();
+	
+	// преобразование от double к Digit
+	Digit B(3.7);
+	B.Show();
+
+}
+</example>
+<p>
+Исходя из примера можно сделать вывод, что конструктор с одним аргументом Class::Class(type) всегда определяет преобразование типа type к типу Class, а не только способ создания объекта при явном обращении к нему.
+</p>
+</li>
+<li>
+<b>Абстрактный к стандартному</b>
+</li>
+<li>
+<b>Абстрактный к абстрактному</b>
+</li> 
+</ul>
+<p>
+Для преобразования абстрактного типа к стандартному или абстрактного к абстрактному в С++ существует средство - функция, выполняющая преобразование типов, или оператор-функция преобразования типов. Она имеет следующий синтаксис: 
+</p>
+<example>
+
+Class::operator type (void); 
+</example>
+<p>
+Эта функция выполняет определенное пользователем преобразование типа Class к типу type. Эта функция должна быть членом класса Class и не иметь аргументов. Кроме того, в ее объявлении не указывается тип возвращаемого значения. Обращение к этой функции может быть как явным, так и неявным. Для выполнения явного преобразования можно использовать как традиционную, так и "функциональную" форму. 
+</p>
+<example>
+#include &lt;iostream&gt;
+
+using namespace std;
+class Number{
+	private:
+		int num;	
+	public:
+		Number(int iNum){
+			num=iNum;
+		}
+		void Show(){
+			cout&lt;&lt;num&lt;&lt;"\n";
+		}	
+};
+class Digit                
+{
+	private:
+		int dig;	
+	public:
+		Digit(int iDig){
+			dig=iDig;
+		}
+		void Show(){
+			cout&lt;&lt;dig&lt;&lt;"\n";
+		}		
+		//преобразование от Digit к int
+		operator int (){
+			return dig;
+		}
+		//преобразование от Digit к Number
+		operator Number (){
+			return Number(dig);
+		}
+};
+
+
+void main()
+{
+	Digit A(5);
+	cout&lt;&lt;"In Digit A:\n";
+	A.Show();
+	// преобразование от Digit к int
+	int a=A;
+	cout&lt;&lt;"In int a:\n";
+	cout&lt;&lt;a&lt;&lt;"\n";
+	
+	Digit B(3);
+	cout&lt;&lt;"In Digit B:\n";
+	B.Show();
+
+	Number b(0);
+	cout&lt;&lt;"In Number b (before):\n";
+	b.Show();
+
+	//преобразование от Digit к Number
+	b=B;
+	cout&lt;&lt;"In Number b (after):\n";
+	b.Show();
+
+}
+</example>
+</lesson>

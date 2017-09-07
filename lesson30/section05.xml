@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<?xml:stylesheet type="text/xsl" href="common/layout.xsl" ?>
+
+<lesson title="Урок №30" next="section06.xml" prev="section04.xml" summ="0">
+<h2>Практический пример. Ввод/вывод массива в/из файл(-а).</h2>
+<p>
+Пример программы, которая осуществляет запись массива в файл или чтение его из файла. Информация хранится в следующем виде:
+</p>
+<ul>
+<li>
+Первая строка - размерность массива (через пробел количество строк и столбцов).
+</li>
+<li>
+Все последующие строки - элементы массива. 
+</li>
+</ul>
+
+<example>
+#include &lt;windows.h&gt;
+#include &lt;fstream&gt;
+#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+using namespace std;
+
+void main()
+{
+   char Answer;
+   const MessageCount = 8;
+   int i, j;
+
+   // Подсказки
+   enum {CHOICE = 3, INPUT_FILENAME, INPUT_DIMENSIONS, INPUT_ELEMENTS, FILE_ERROR};
+
+   // Сообщения
+   char Msg[MessageCount][50] = 
+   {
+      "1. Вывести данные из текстового файла\n",
+      "2. Записать данные в текстовый файл\n",
+      "3. Выход из программы\n",
+      "\nВаш выбор: ",
+      "Введите имя обрабатываемого файла: ",
+      "Введите размерности матрицы:\n",
+      "Введите элементы матрицы:\n",
+      "Невозможно открыть файл\n"
+   };
+
+   // Русификация сообщений и вывод меню на экран
+	
+   for(i = 0; i &lt; MessageCount; i++)
+      CharToOem(Msg[i], Msg[i]);
+
+   do 
+   {
+      for(int i = 0; i &lt; 4; i++)
+         cout &lt;&lt; Msg[i];
+      cin &gt;&gt;  Answer;
+   } while (Answer &lt; '1' || Answer &gt; '3');
+
+   if(Answer == '3')
+      return;
+
+   // Переменная для имени файла
+   char FileName[80]; 
+   
+   // Размерности матрицы
+   int M, N;
+	
+   int num;
+   cout &lt;&lt; "\n" &lt;&lt; Msg[INPUT_FILENAME];
+   cin &gt;&gt; FileName;
+	
+   // Если выбран первый пункт меню,
+   // то выводим данные из текстового файла на экран
+   if(Answer == '1')
+   {
+      // Если файл с указанным именем не существует, 
+      // выводим сообщение об ошибке
+      ifstream inF(FileName, ios::in | ios::_Nocreate); 
+      if (!inF)
+      {
+         cout &lt;&lt; endl &lt;&lt; Msg[FILE_ERROR];
+         return;
+      }
+      // Считываем размерность массива
+      inF &gt;&gt; M;
+      inF &gt;&gt; N;
+      // Считываем элементы массива из файла и выводим их сразу на экран
+      for (i = 0; i &lt; M; i++)
+      {
+         for (j = 0; j &lt; N; j++)
+         {
+            inF &gt;&gt; num;
+            cout &lt;&lt; setw(6) &lt;&lt; num;
+         }
+         cout &lt;&lt; endl;
+      }
+      inF.close();
+   }
+   
+   // Если выбран второй пункт меню, то запрашиваем 
+   // у пользователя данные и выводим их в текстовый файл
+   else
+   {
+      // Открываем файл для записи.
+      // Если файл с указанным именем не существует, 
+      // то программа создает его
+      ofstream outF(FileName, ios::out);
+      if (!outF)
+      {
+         cout &lt;&lt; "\n" &lt;&lt; Msg[FILE_ERROR];
+         return;
+      }
+      // Запрашиваем размерность матрицы и записываем данные в файл
+      cout &lt;&lt; Msg[INPUT_DIMENSIONS];
+      cout &lt;&lt; "M: ";
+      cin &gt;&gt; M;
+      cout &lt;&lt; "N: ";
+      cin &gt;&gt; N;
+
+      outF &lt;&lt; M &lt;&lt; ' ' &lt;&lt; N &lt;&lt; "\n";
+		
+      cout &lt;&lt; Msg[INPUT_ELEMENTS];
+      // Запрашиваем элементы массива и записываем их в файл
+      for (i = 0; i &lt; M; i++)
+      {
+         for(j = 0; j &lt; N; j++)
+         {
+            cout &lt;&lt; "A[" &lt;&lt; i &lt;&lt; "][" &lt;&lt; j &lt;&lt; "] = ";
+            cin &gt;&gt; num;
+            outF &lt;&lt; num &lt;&lt; " ";
+         }
+         outF &lt;&lt; "\n";
+      }
+      outF.close();
+   }
+}
+</example>
+</lesson>

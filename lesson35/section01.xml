@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<?xml:stylesheet type="text/xsl" href="common/layout.xsl" ?>
+
+<lesson title="Урок №35" next="section02.xml" prev="index.xml" summ="1">
+<h2>Анализ и использование класса vector. Библиотека vector. </h2>
+<p>Класс <i><b>vector</b></i> поддерживает динамический массив и счетчик элементов, сохраненных в нем. Спецификация его шаблона имеет следующий вид: </p>
+<example>
+template &lt;class T, class Allocator = Alloctor&lt;T&gt;&gt;
+class vector
+</example>
+<p>Здесь <b>T</b> - <b><i>тип сохраняемых данных</i></b>, а <b>Allocator</b><b><i> задает распределитель.</i></b> Класс <i><b>vector</b></i> имеет следующие конструкторы:</p>
+<example>
+explicit vector(const Allocator &amp;a = Allocator());
+<br/>
+explicit vector(size_type num, const T &amp;val = T(), const Allocator &amp;a = Allocator());
+<br/>
+vector(const vector &lt;T,Allocator&gt; &amp;ob);
+<br/>
+template &lt; class InIter&gt; vector(InIter start, InIter end, const Allocator &amp;a = Allocator());
+</example>
+<p>Первая форма конструктора создает пустой вектор. Вторая создает вектор, который создает num элементов со значением val. Третья создает вектор, который содержит те же элементы, что и вектор ob. Четвертая создает вектор, который содержит элементы в диапазоне, заданном параметрами start и end.</p>
+<p>Для класса <i><b>vector</b></i> определены следующие операторы сравнения:</p>
+<ul>
+<li><b><i>==</i></b></li>
+<li><b><i>&lt;</i></b></li>
+<li><b><i>&lt;=</i></b></li>
+<li><b><i>!=</i></b></li>
+<li><b><i>&gt;</i></b></li>
+<li><b><i>&gt;=</i></b></li></ul>
+<p>Класс <i><b>vector</b></i> содержит следующие функции-члены:</p>
+<hr/>
+<p><b>template &lt;class InIter&gt;
+void assign(InIter start, InIter end);</b></p>
+<p>Помещает в вектор последовательность, определяемую параметрами start и end.</p>
+<hr/>
+<p><b>void assign(size_type num, const T &amp;val);</b></p>
+<p>Помещает в вектор num элементов со значением val.</p>
+<hr/>
+<p><b>reference at(size_type i);</b></p>
+<p><b>const_reference at(size_type i) const;</b></p>
+<p>Возвращает ссылку на элемент, заданный параметром i.</p>
+<hr/>
+<p><b>reference back();</b></p>
+<p><b>const_reference back() const;</b></p>
+<p>Возвращает ссылку на последний элемент в векторе.</p>
+<hr/>
+<p><b>iterator begin();</b></p>
+<p><b>const_iterator begin() const;</b></p>
+<p>Возвращает итератор для первого элемента в векторе.</p>
+<hr/>
+<p><b>size_type capacity() const;</b></p>
+<p>Возвращает текущую ёмкость вектора, которая представляет собой количество элементов, способное храниться в векторе до того, как возникнет необходимость в выделении дополнительной памяти.</p>
+<hr/>
+<p><b>void clear();</b></p>
+<p>Удаляет все элементы из вектора.</p>
+<hr/>
+<p><b>bool empty() const;</b></p>
+<p>Возвращает значение истины, если используемый вектор пуст, и значение лжи в противном случае.</p>
+<hr/>
+<p><b>const_iterator end() const;</b></p>
+<p><b>iterator end();</b></p>
+<p>Возвращает итератор для конца вектора.</p>
+<hr/>
+<p><b>iterator erase(iterator i);</b></p>
+<p>Удаляет элемент, адресуемый итератором i, возвращает итератор для элемента, расположенного после удаленного.</p>
+<hr/>
+<p><b>iterator erase(iterator start, iterator end);</b></p>
+<p>Удаляет элементы в диапазоне, задаваемом параметрами start и end, возвращает итератор для элемента, расположенного за последним удалённым элементом.</p>
+<hr/>
+<p><b>reference front();</b></p>
+<p><b>const_reference front() const;</b></p>
+<p>Возвращает ссылку на первый элемент в векторе.</p>
+<hr/>
+<p><b>allocator_type get_allocator() const;</b></p>
+<p>Возвращает распределитель вектора.</p>
+<hr/>
+<p><b>iterator insert(iterator i, const T &amp;val = T());</b></p>
+<p>Вставляет значение val непосредственно перед элементом, заданным параметром i, возвращает итератор для этого элемента.</p>
+<hr/>
+<p><b>void insert(iterator i, size_type num, const T &amp;val);</b></p>
+<p>Вставляет num копий значения val непосредственно перед элементом, заданным параметром i.</p>
+<hr/>
+<p><b>template &lt;class InIter&gt;
+void insert(iterator i, InIter start, InIter end);</b></p>
+<p>Вставляет в вектор последовательность, определяемую параметрами start и end, непосредственно перед элементом, заданным параметром i.</p>
+<hr/>
+<p><b>size_type max_size() const;</b></p>
+<p>Возвращает максимальное число элементов, которое может содержать вектор.</p>
+<hr/>
+<p><b>reference operator[](size_type i) const;</b></p>
+<p><b>const_reference operator[](size_type i) const;</b></p>
+<p>Возвращает ссылку на элемент, заданный параметром i.</p>
+<hr/>
+<p><b>void pop_back();</b></p>
+<p>Удаляет последний элемент в векторе.</p>
+<hr/>
+<p><b>void push_back(const T &amp;val);</b></p>
+<p>Добавлчет в конец вектора элемент со значением, заданным параметром val.</p>
+<hr/>
+<p><b>reverse_iterator rbegin();</b></p>
+<p><b>const_reverse_iterator rbegin() const;</b></p>
+<p>Возвращает реверсивный итератор для конца вектора.</p>
+<hr/>
+<p><b>reverse_iterator rend();</b></p>
+<p><b>const_reverse_iterator rend() const;</b></p>
+<p>Возвращает реверсивный итератор для начала вектора.</p>
+<hr/>
+<p><b>void reverse(size_type num);</b></p>
+<p>Устанавливает емкость вектора равной не менее заданного значения num</p>
+<hr/>
+<p><b>void resize(size_type num, const T &amp;val = T());</b></p>
+<p>Устанавливает емкость вектора равной не менее заданного значения num, если вектор для этого нужно удлинить, то в его конец добавляются элементы со значением, заданным параметром val.</p>
+<hr/>
+<p><b>size_type size() const;</b></p>
+<p>Возвращает текущее количество элементов в векторе.</p>
+<hr/>
+<p><b>void swap(deque&lt;T,Allocator&gt; &amp;ob);</b></p>
+<p>Выполняет обмен элементами данного вектора и вектора ob.</p>
+<hr/>
+<p><b>void flip();</b></p>
+<p>Инвертирует значения всех битов в векторе.</p>
+<hr/>
+<p><b>static void swap(reference i, reference j);</b></p>
+<p>Переставляет местами биты, заданные параметрами i и j.</p>
+</lesson>

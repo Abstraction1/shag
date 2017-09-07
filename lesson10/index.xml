@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<?xml:stylesheet type="text/xsl" href="common/layout.xsl" ?>
+
+<lesson title="Урок №10" next="section2.xml" prev="index.xml">
+<h2>Урок №10.</h2>
+<ul>
+	<li><a href="section2.xml">Линейный поиск.</a></li>
+	<li><a href="section3.xml">Сортировка выбором.</a></li>
+	<li><a href="section4.xml">"Пузырьковая" cортировка. </a></li>
+	<li><a href="section5.xml">Сортировка вставками.</a></li>
+	<li><a href="hometask.xml">Домашнее задание</a></li>
+	
+</ul>
+</lesson>

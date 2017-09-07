@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<?xml:stylesheet type="text/xsl" href="common/layout.xsl" ?>
+
+<lesson title="Урок №30" next="section05.xml" prev="section03.xml" summ="0">
+<h2>Практический пример использования файлов в стиле С++.</h2>
+<p>
+Ну что ж, пора переходить к практике. Сейчас, мы с вами рассмотрим пример, который, используя средства языка С++, реализует возможность просмотра файла в шестнадцатиричном виде.
+</p>
+<example>
+#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;iomanip&gt;
+#include &lt;string.h&gt;
+#include &lt;conio.h&gt;
+using namespace std;
+
+// Максимальная длина пути к файлу
+#define MAX_PATH 260
+// Количество столбцов на экране
+#define NUM_COLS 18
+// Количество строк на экране 
+#define NUM_ROWS 24
+
+void main() 
+{
+   char path[MAX_PATH];
+   // Запрашиваем путь к файлу
+   cout &lt;&lt; "Input path to file: ";
+   cin.getline(path, MAX_PATH);
+  
+   int counter = 0, i = 0, j = 0;
+   char text[NUM_COLS];
+
+   // Открытие файла в двоичном режиме
+   ifstream input(path, ios::in | ios::binary);
+   if (!input)
+   {
+      cout &lt;&lt; "Cannot open file for display!" &lt;&lt; endl;
+      return;
+   }
+
+   // Режим отображения в верхнем регистре для шестнадцатиричного вывода
+   cout.setf(ios::uppercase);
+
+   // Пока не конец файла, читаем из него данные 
+   // и производим форматированный вывод на экран
+   while (!input.eof()) 
+   {
+      // Посимвольное чтение
+	   for (i = 0; (i &lt; NUM_COLS &amp;&amp; !input.eof()); i++)			
+			input.get(text[i]);
+			
+
+      if (i &lt; NUM_COLS)
+         i--;
+
+      for (j = 0; j &lt; i; j++)
+         if((unsigned)text[j] &lt; 0x10)
+
+            // Количество символов для отображения числа меньше двух?
+            cout &lt;&lt; setw(2) &lt;&lt; 0 &lt;&lt; hex &lt;&lt; (unsigned) text[j];
+
+         else
+            cout &lt;&lt; setw(3) &lt;&lt; hex &lt;&lt; (unsigned) text[j];
+		
+      // Выравнивание для незавершенной строки
+      for (; j &lt; NUM_COLS; j++)
+         cout &lt;&lt; "   ";
+		
+      cout &lt;&lt; "\t";
+      for (j = 0; j &lt; i; j++)
+         // Символ не является управляющим?
+         if(text[j] &gt; 31 &amp;&amp; text[j] &lt;= 255)
+            cout &lt;&lt; text[j];
+         else
+            cout &lt;&lt; ".";
+      cout &lt;&lt; "\n";
+
+      // Если экран уже заполнен, производим остановку
+      if (++counter == NUM_ROWS) 
+      {
+
+         counter = 0;
+         cout &lt;&lt; "Press any key to continue..." &lt;&lt; flush;
+
+         // Ожидаем нажатия любой клавиши
+         getch();
+         cout &lt;&lt; "\n";
+
+      }
+   }
+   // Закрываем файл
+   input.close();
+}
+</example>
+</lesson>

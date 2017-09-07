@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<?xml:stylesheet type="text/xsl" href="common/layout.xsl" ?>
+
+<lesson title="Урок №8" next="section3.xml" prev="section1.xml" summ="0">	  
+
+<h2>Примеры на создание и вызов функций.</h2>
+
+<h3>Функция, которая не принимает никаких параметров и не возвращает никакого значения.</h3>
+<example>
+#include &lt;iostream&gt;
+using namespaсe std;
+
+// создание функции
+void Hello(){
+	// показ на экран строки текста
+	cout&lt;&lt;"Hello, World!!!\n\n";
+}
+
+void main(){
+
+	Hello(); // вызов
+	Hello(); // вызов	
+	Hello(); // вызов
+
+}
+</example>
+<p> Результат - три раза фраза - <b>Hello, World!!!</b> - на экране.</p>
+
+
+
+<h3>Функция, которая принимает один параметр, но не возвращает никакого значения.</h3>
+<example>
+#include &lt;iostream&gt;
+using namespaсe std;
+
+// рисует линию из звездочек длиной count
+void Star(int count){
+	for(int i=0;i&lt;count;i++)
+		cout&lt;&lt;'*';
+	cout&lt;&lt;"\n\n";
+}
+
+void main(){
+
+	Star(3); // показ линии из трех звездочек
+	Star(5); // показ линии из пяти звездочек
+
+}
+</example>
+
+<h3>Функция, которая принимает два параметра, но все еще не возвращает никакого значения.</h3>
+<example>
+#include &lt;iostream&gt;
+using namespaсe std;
+
+// рисует линию из символа - symb, длиной count
+void AnyLine(char symb, int count){
+	for(int i=0;i&lt;count;i++)
+		cout&lt;&lt;symb;
+	cout&lt;&lt;"\n\n";
+}
+
+void main(){
+
+	AnyLine('+',3); // показ линии из трех плюсов
+	AnyLine('=',5); // показ линии из пяти знаков равно
+
+}
+</example>
+
+<h3>Функция, которая принимает два параметра, и возвращает значение.</h3>
+<example>
+#include &lt;iostream&gt;
+using namespaсe std;
+// вычисляет степень (Pow) числа (Digit)
+int MyPow(int Digit, int Pow){
+	int key=1;
+	for(int i=0;i&lt;Pow;i++)
+		key*=Digit;
+	return key;
+}
+void main(){
+
+	 // запись возвращаемого результата в переменную res
+	int res=MyPow(5,3);
+	cout&lt;&lt;"Res = "&lt;&lt;res&lt;&lt;"\n\n";
+
+}
+</example>
+</lesson>

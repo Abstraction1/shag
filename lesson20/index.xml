@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<?xml:stylesheet type="text/xsl" href="common/layout.xsl" ?>
+
+<lesson title="Урок №20" next="section01.xml" prev="index.xml">
+<h2>Урок №20.</h2>
+<ul>
+	<li><a href="section01.xml">Основы объектно-ориентированного программирования.</a></li>
+	<li><a href="section02.xml">Знакомство с классами.</a></li>
+	<li><a href="section03.xml">Конструкторы и деструкторы.</a></li>
+	<li><a href="HomeTask.xml">Домашнее задание.</a></li>
+</ul>
+</lesson>

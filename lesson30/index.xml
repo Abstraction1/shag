@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<?xml:stylesheet type="text/xsl" href="common/layout.xsl" ?>
+
+<lesson title="Урок №30" next="section01.xml" prev="index.xml">
+<h2>Урок №30.</h2>
+<ul>
+	<li><a href="section01.xml">Понятие потока.</a></li>
+	<li><a href="section02.xml">Ввод-вывод в языке С++.</a></li>
+	<li><a href="section03.xml">Файловый ввод-вывод с применением потоков.</a></li>
+	<li><a href="section04.xml">Практический пример использования файлов в стиле С++.</a></li>
+	<li><a href="section05.xml">Практический пример. Ввод/вывод массива в/из файл(-а).</a></li>
+	<li><a href="section06.xml">Практический пример записи объекта класса в файл.</a></li>	
+	<li><a href="hometask.xml">Домашнее задание.</a></li> 
+
+</ul>
+</lesson>
+
+
+
+
+
+

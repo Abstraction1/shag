@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<?xml:stylesheet type="text/xsl" href="common/layout.xsl" ?>
+
+<lesson title="Урок №26" next="section08.xml" prev="section06.xml" summ="0">
+<h2>Реализация - кольцевая очередь.</h2>
+<example>
+#include &lt;iostream&gt;
+#include &lt;string.h&gt;
+#include &lt;time.h&gt;
+using namespace std;
+
+class QueueRing
+{
+	// Очередь
+	int * Wait;
+	// Максимальный размер очереди
+	int MaxQueueLength;
+	// Текущий размер очереди
+	int QueueLength;
+
+public:
+	// Конструктор
+	QueueRing(int m);
+
+	//Деструктор
+	~QueueRing();
+
+	// Добавление элемента
+	void Add(int c); 
+
+	// Извлечение элемента
+	bool Extract();        
+
+	// Очистка очереди
+	void Clear();    
+
+	// Проверка существования элементов в очереди
+	bool IsEmpty();    
+
+	// Проверка на переполнение очереди
+	bool IsFull();     
+
+	// Количество элементов в очереди
+	int GetCount();   
+
+	//демонстрация очереди
+	void Show();
+};
+
+void QueueRing::Show(){
+	cout&lt;&lt;"\n-------------------------------------\n";
+	//демонстрация очереди
+	for(int i=0;i&lt;QueueLength;i++){
+		cout&lt;&lt;Wait[i]&lt;&lt;" ";
+	}
+	cout&lt;&lt;"\n-------------------------------------\n";
+}
+
+QueueRing::~QueueRing()
+{
+	//удаление очереди
+	delete[]Wait;
+}
+
+QueueRing::QueueRing(int m)
+{
+	//получаем размер
+	MaxQueueLength=m;
+	//создаем очередь
+	Wait=new int[MaxQueueLength];
+	// Изначально очередь пуста
+	QueueLength = 0;
+}
+
+void QueueRing::Clear()
+{
+	// Эффективная "очистка" очереди 
+	QueueLength = 0;
+}
+
+bool QueueRing::IsEmpty()
+{
+	// Пуст?
+	return QueueLength == 0;
+}
+
+bool QueueRing::IsFull()
+{
+	// Полон?
+	return QueueLength == MaxQueueLength;
+}
+
+int QueueRing::GetCount()
+{
+	// Количество присутствующих в стеке элементов
+	return QueueLength;
+}
+
+void QueueRing::Add(int c)
+{
+	// Если в очереди есть, то увеличиваем количество
+	// значений и вставляем новый элемент
+	if(!IsFull())
+		Wait[QueueLength++] = c;
+}
+
+bool QueueRing::Extract()
+{
+	// Если в очереди есть элементы, то возвращаем тот, 
+	// который вошел первым и сдвигаем очередь	
+	if(!IsEmpty()){
+		//запомнить первый
+		int temp=Wait[0];
+
+		//сдвинуть все элементы
+		for(int i=1;i&lt;QueueLength;i++)
+			Wait[i-1]=Wait[i];
+		
+		//забрасываем первый "вытолкнутый элемент в конец"
+		Wait[QueueLength-1]=temp;
+		return 1;
+		
+	}
+	else return 0;
+}
+
+void main()
+{
+	srand(time(0));
+
+	//создание очереди
+	QueueRing QUR(25);
+
+	//заполнение части элементов
+	for(int i=0;i&lt;5;i++){
+		QUR.Add(rand()%50);
+	}
+	//показ очереди
+	QUR.Show();
+
+	//извлечение элемента
+	QUR.Extract();
+
+	//показ очереди
+	QUR.Show();
+}
+</example>
+</lesson>

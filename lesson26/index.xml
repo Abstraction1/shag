@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<?xml:stylesheet type="text/xsl" href="common/layout.xsl" ?>
+
+<lesson title="Урок №26" next="section01.xml" prev="index.xml">
+<h2>Урок №26.</h2>
+<ul>
+	<li><a href="section01.xml">Понятие динамической структуры данных</a></li>
+	<li><a href="section02.xml">Стек</a></li>
+	<li><a href="section03.xml">Реализация - стек.</a></li>
+	<li><a href="section04.xml">Очередь</a></li>
+	<li><a href="section05.xml">Реализация - очередь.</a></li>
+	<li><a href="section06.xml">Кольцевая очередь</a></li>
+	<li><a href="section07.xml">Реализация - кольцевая очередь.</a></li>
+	<li><a href="section08.xml">Очередь с приоритетами.</a></li>
+	<li><a href="section09.xml">Реализация - очередь с приоритетами.</a></li>
+	<li><a href="hometask.xml">Домашнее задание.</a></li>
+</ul>
+</lesson>
+
+
+
+
+
+

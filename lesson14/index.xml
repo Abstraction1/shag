@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<?xml:stylesheet type="text/xsl" href="common/layout.xsl" ?>
+
+<lesson title="Урок №14" next="section1.xml" prev="index.xml">
+<h2>Урок №14.</h2>
+<ul>
+	<li><a href="section1.xml">Работа со строками в С++. Синтаксис объявления строковых массивов и их инициализация. </a></li>
+	<li><a href="section1_2.xml">Взаимосвязь строк и указателей. </a></li>
+	<li><a href="section2.xml">Функции работы со строками из библиотеки обработки строк.</a></li>
+	<li><a href="section3.xml">Работа со строками в С++. Примеры.</a></li>
+	<li><a href="section4.xml">Пример задачи на новый материал.</a></li>	
+	<li><a href="hometask.xml">Домашнее задание</a></li>
+</ul>
+</lesson>

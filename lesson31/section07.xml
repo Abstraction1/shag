@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<?xml:stylesheet type="text/xsl" href="common/layout.xsl" ?>
+
+<lesson title="Урок №31" next="section08.xml" prev="section06.xml" summ="0">
+<h2>Пример использования множественного наследования.</h2>
+<p>Классический пример, переходящий из поколения в поколение. Создадим примитивную структуру наследования. Соберем животное - "лось"))).</p>
+<example>
+#include &lt;iostream&gt;
+#include &lt;string.h&gt;
+using namespace std;
+
+// Класс "рога"
+class Roga{    
+     
+protected:
+
+	char color[25];
+	int wes;
+
+public:
+    	Roga(){
+
+        	strcpy(color,"Dirty");
+		wes=20;
+
+	}
+
+	Roga(char  *c,int w){
+
+        	strcpy(color,c);
+		wes=w;
+
+	}
+
+};
+
+// Класс "копыта"
+class Kopyta{      
+                
+protected:
+
+	char forma[25];
+	int razmer;
+
+public:
+   	Kopyta(){
+        	strcpy(forma,"Big");
+		razmer=10;
+	}
+
+	Kopyta(char  *c,int w){
+
+        	strcpy(forma,c);
+		razmer=w;
+	}
+
+};
+
+// Класс "Лось", производный от
+// классов "рога" и "копыта"
+class Los:public Roga,public Kopyta{
+         
+	public:
+	char name[255];
+    
+	Los(char  *c){
+	  strcpy(name,c);
+    	}
+
+	// Функция потомка может обращаться к
+    	// элементам обоих базовых классов                              
+    	void DisplayInfo(){     
+       
+		cout&lt;&lt;"Name "&lt;&lt;name&lt;&lt;"\n";
+	        cout&lt;&lt;"Forma "&lt;&lt;forma&lt;&lt;"\n";  
+        	cout&lt;&lt;"Color "&lt;&lt;color&lt;&lt;"\n";
+		cout&lt;&lt;"Wes rogov "&lt;&lt;wes&lt;&lt;"\n";
+	        cout&lt;&lt;"Razmer kopyt "&lt;&lt;razmer&lt;&lt;"\n"; 
+ 
+	}
+};
+
+void main()
+{
+
+	//создание объекта класса-потомка
+    	Los l("Vasya");
+     	l.DisplayInfo();
+
+}
+
+</example>
+</lesson>

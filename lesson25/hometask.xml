@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<?xml:stylesheet type="text/xsl" href="common/layout.xsl" ?>
+
+<lesson title="Урок №25" next="index.xml" prev="section03.xml" summ="0">
+<h2>Домашнее задание</h2>
+<p>1. Написать класс, реализующий работу с комлексными числами.</p>
+<p>2. Написать программу, которая на основе классов реализует карточную игру Блэк-Джек.</p>
+
+</lesson>

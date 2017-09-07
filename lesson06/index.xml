@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<?xml:stylesheet type="text/xsl" href="common/layout.xsl" ?>
+
+<lesson title="Урок №6" next="section2.xml" prev="index.xml">
+<h2>Урок №6.</h2>
+<ul>
+	<li><a href="section2.xml">Необходимость группировки данных.</a></li>
+	<li><a href="section3.xml">Создание массива и заполнение его данными.</a></li>
+	<li><a href="section4.xml">Пример программы для нахождения суммы отрицательных элементов массива.</a></li>
+	<li><a href="section5.xml">Пример программы для нахождения минимального и максимального элементов  массива.</a></li>
+	<li><a href="hometask.xml">Домашнее задание</a></li>
+	<li><a href="runtest.xml">Тест для самопроверки.</a></li>
+</ul>	
+</lesson>

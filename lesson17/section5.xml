@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<?xml:stylesheet type="text/xsl" href="common/layout.xsl" ?>
+
+<lesson title="Урок №17" next="hometask.xml" prev="section4.xml" summ="1">
+<h2>Битовые поля.</h2>
+<p>В прошлом уроке мы с Вами рассматривали понятие <b>структуры</b>. Полями структур могут быть не только переменные, но и другие образования, в частности, <b><i>поля битов</i></b>. Хотя правила языка не имеют ограничений на характер этих полей, кроме требования, чтобы они помещались в объеме машинного слова, в типичных применениях поля битов служат для хранения целых данных (чаще типа <b>unsigned</b>).</p>
+<p>Описание поля битов состоит из описания типа поля, его имени и указанного после двоеточия размера поля в битах, например: <b>unsigned status: 6;</b>. </p>
+<p>Если имя поля опущено, то создается скрытое поле. Если размер поля битов представлен числом 0, то следующее поле битов начнется с границы машинного слова. </p>
+<h5>Пример.</h5> 
+<example>
+#include &lt;iostream&gt;
+using namespace std;
+void Binary(unsigned);
+void main()
+{
+   struct Bits
+   { 
+     unsigned bit1: 3;
+     unsigned bit2: 2;
+     unsigned bit3: 3;
+   } Good;
+   
+   Good.bit1 = 4;
+   Good.bit2 = 3;
+   Good.bit3 = 6;
+   cout&lt;&lt;"Show: "&lt;&lt;Good.bit1&lt;&lt;" ";
+   cout&lt;&lt;Good.bit2&lt;&lt;" ";
+   cout&lt;&lt;Good.bit3&lt;&lt;"\n\n";
+   cout &lt;&lt; "Sum: ";
+   Binary(Good.bit1 + Good.bit2 + Good.bit3);
+} 
+// Функция выводит на экран двоичное представление числа A.
+void Binary (unsigned A) 
+{
+    int i,N;
+    if(A&gt;255)
+		N = 15;
+    else
+		N = 7;
+    for (i=N; i >= 0; i--)
+    { 
+	cout&lt;&lt;((A&gt;&gt;i)&amp;1);
+        	if(i==8)
+		cout&lt;&lt;" ";
+    }
+    cout&lt;&lt;"\n\n";
+}
+
+</example>
+</lesson>
